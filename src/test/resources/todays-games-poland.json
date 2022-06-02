@@ -1,0 +1,151 @@
+{
+  "DATA": [
+    {
+      "NAME": "Poland: PlusLiga - Play Offs",
+      "HEADER": "Poland: PlusLiga - Play Offs;172;6R5lSU2d",
+      "NAME_PART_1": "Poland",
+      "NAME_PART_2": "PlusLiga - Play Offs",
+      "TOURNAMENT_TEMPLATE_ID": "jNqF318i",
+      "COUNTRY_ID": 154,
+      "COUNTRY_NAME": "Poland",
+      "TOURNAMENT_STAGE_ID": "6R5lSU2d",
+      "TOURNAMENT_TYPE": "t",
+      "TOURNAMENT_ID": "8rJspPU1",
+      "SOURCE_TYPE": 0,
+      "HAS_LIVE_TABLE": 0,
+      "STANDING_INFO": 2,
+      "TEMPLATE_ID": "154_jNqF318i",
+      "TOURNAMENT_STAGE_TYPE": 11,
+      "SHORT_NAME": "PlusLiga",
+      "URL": "/volleyball/poland/plusliga/",
+      "TOURNAMENT_IMAGE": "https://www.flashscore.com/res/image/data/r1lzUE8j-tChnvtZg.png",
+      "SORT": "33Poland      006Poland0000000000001000PlusLiga - P020y Offs000",
+      "STAGES_COUNT": 0,
+      "ZKL": "",
+      "ZKU": "",
+      "TOURNAMENT_SEASON_ID": "8rJspPU1",
+      "CATEGORY_NAME": "Poland",
+      "EVENTS": [
+        {
+          "EVENT_ID": "I50fWMeO",
+          "START_TIME": 1650987000,
+          "START_UTIME": 1650987000,
+          "STAGE_TYPE": "FINISHED",
+          "MERGE_STAGE_TYPE": "FINISHED",
+          "STAGE": "FINISHED",
+          "SORT": "Zawiercie",
+          "ROUND": "Semi-finals",
+          "VISIBLE_RUN_RATE": 0,
+          "HAS_LINEPS": 1,
+          "STAGE_START_TIME": 1650993479,
+          "GAME_TIME": "-1",
+          "RECENT_OVERS": null,
+          "SHORTNAME_HOME": "ZAW",
+          "HOME_PARTICIPANT_IDS": [
+            "WhuLLKZT"
+          ],
+          "HOME_PARTICIPANT_TYPES": [
+            1
+          ],
+          "HOME_NAME": "Zawiercie",
+          "FH": "Zawiercie",
+          "HOME_EVENT_PARTICIPANT_ID": "d67lvi06",
+          "HOME_GOAL_VAR": 0,
+          "HOME_SCORE_CURRENT": "0",
+          "HOME_SCORE_PART_1": "20",
+          "HOME_SCORE_PART_2": "21",
+          "HOME_SCORE_PART_3": "21",
+          "HOME_IMAGES": [
+            "https://www.flashscore.com/res/image/data/Me3bLOAr-fLPHJkLq.png"
+          ],
+          "IMM": "n7gpLG2s",
+          "IMW": "100",
+          "IMP": "8MLvWPHG-Am8rqQeA.png",
+          "IME": "",
+          "SHORTNAME_AWAY": "KED",
+          "AWAY_PARTICIPANT_IDS": [
+            "n7gpLG2s"
+          ],
+          "AWAY_PARTICIPANT_TYPES": [
+            1
+          ],
+          "AWAY_NAME": "Kedzierzyn-Kozle",
+          "FK": "Kedzierzyn-Kozle",
+          "AWAY_EVENT_PARTICIPANT_ID": "IF8puXp0",
+          "WINNER": 2,
+          "ODDS_WINNER": 2,
+          "ODDS_WINNER_OUTCOME": 2,
+          "AWAY_GOAL_VAR": 0,
+          "AWAY_SCORE_CURRENT": "3",
+          "AWAY_SCORE_PART_1": "25",
+          "AWAY_SCORE_PART_2": "25",
+          "AWAY_SCORE_PART_3": "25",
+          "AWAY_IMAGES": [
+            "https://www.flashscore.com/res/image/data/8MLvWPHG-Am8rqQeA.png"
+          ],
+          "INFO_NOTICE": "Series tied 1-1."
+        },
+        {
+          "EVENT_ID": "YHz4jQtt",
+          "START_TIME": 1650997800,
+          "START_UTIME": 1650997800,
+          "STAGE_TYPE": "FINISHED",
+          "MERGE_STAGE_TYPE": "FINISHED",
+          "STAGE": "FINISHED",
+          "SORT": "Belchatow",
+          "ROUND": "Semi-finals",
+          "VISIBLE_RUN_RATE": 0,
+          "HAS_LINEPS": 1,
+          "STAGE_START_TIME": 1651003187,
+          "GAME_TIME": "-1",
+          "RECENT_OVERS": null,
+          "SHORTNAME_AWAY": "JAS",
+          "AWAY_PARTICIPANT_IDS": [
+            "lWD9RIPD"
+          ],
+          "AWAY_PARTICIPANT_TYPES": [
+            1
+          ],
+          "AWAY_NAME": "Jastrzebski *",
+          "FK": "Jastrzebski",
+          "AWAY_EVENT_PARTICIPANT_ID": "IZbv1E7J",
+          "WINNER": 2,
+          "ODDS_WINNER": 2,
+          "ODDS_WINNER_OUTCOME": 2,
+          "DRAW_PARTICIPANT_WINNER_AWAY": "1",
+          "AWAY_GOAL_VAR": 0,
+          "AWAY_SCORE_CURRENT": "3",
+          "AWAY_SCORE_PART_1": "25",
+          "AWAY_SCORE_PART_2": "25",
+          "AWAY_SCORE_PART_3": "25",
+          "AWAY_IMAGES": [
+            "https://www.flashscore.com/res/image/data/21YQQ3h5-lv7nrpBG.png"
+          ],
+          "IMM": "SMCDQxuK",
+          "IMW": "100",
+          "IMP": "G2w7vsCr-EFBWoSBi.png",
+          "IME": "",
+          "SHORTNAME_HOME": "BEL",
+          "HOME_PARTICIPANT_IDS": [
+            "SMCDQxuK"
+          ],
+          "HOME_PARTICIPANT_TYPES": [
+            1
+          ],
+          "HOME_NAME": "Belchatow",
+          "FH": "Belchatow",
+          "HOME_EVENT_PARTICIPANT_ID": "Wx3r0YMP",
+          "HOME_GOAL_VAR": 0,
+          "HOME_SCORE_CURRENT": "0",
+          "HOME_SCORE_PART_1": "18",
+          "HOME_SCORE_PART_2": "22",
+          "HOME_SCORE_PART_3": "19",
+          "HOME_IMAGES": [
+            "https://www.flashscore.com/res/image/data/G2w7vsCr-EFBWoSBi.png"
+          ],
+          "INFO_NOTICE": "Jastrzebski wins series 2-0."
+        }
+      ]
+    }
+  ]
+}

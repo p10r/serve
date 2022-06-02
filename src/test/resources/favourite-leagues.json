@@ -1,0 +1,556 @@
+{
+  "DATA": [
+    {
+      "LEAGUE_NAME": "European Championships",
+      "COUNTRY_NAME": "Europe",
+      "COUNTRY_ID": 6,
+      "ACTUAL_TOURNAMENT_SEASON_ID": "APYEb3WB",
+      "TE": "CvPuKVY0",
+      "SEASON_ID": 158,
+      "TEMPLATE_ID": "6_CvPuKVY0",
+      "STAGES": [
+        {
+          "STAGE_ID": "xnHiCwZ1",
+          "STAGE_NAME": "Main",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "f7TsyNB2",
+          "STAGE_NAME": "Play Offs",
+          "OUT": "2"
+        },
+        {
+          "STAGE_ID": "beImDJJe",
+          "STAGE_NAME": "Qualification",
+          "OUT": "1"
+        }
+      ]
+    },
+    {
+      "LEAGUE_NAME": "Champions League",
+      "COUNTRY_NAME": "Europe",
+      "COUNTRY_ID": 6,
+      "ACTUAL_TOURNAMENT_SEASON_ID": "dU61IQnC",
+      "TE": "6ecm9Xlr",
+      "SEASON_ID": 172,
+      "TEMPLATE_ID": "6_6ecm9Xlr",
+      "STAGES": [
+        {
+          "STAGE_ID": "EZimMSB4",
+          "STAGE_NAME": "Main",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "r9diLnRA",
+          "STAGE_NAME": "Play Offs",
+          "OUT": "2"
+        },
+        {
+          "STAGE_ID": "QHJ3K6tH",
+          "STAGE_NAME": "Qualification",
+          "OUT": "2"
+        }
+      ]
+    },
+    {
+      "LEAGUE_NAME": "CEV Cup",
+      "COUNTRY_NAME": "Europe",
+      "COUNTRY_ID": 6,
+      "ACTUAL_TOURNAMENT_SEASON_ID": "YqqgySHn",
+      "TE": "CS0fFFd8",
+      "SEASON_ID": 172,
+      "TEMPLATE_ID": "6_CS0fFFd8",
+      "STAGES": [
+        {
+          "STAGE_ID": "2k1vAAqd",
+          "STAGE_NAME": "Main",
+          "OUT": "2"
+        }
+      ]
+    },
+    {
+      "LEAGUE_NAME": "European Games",
+      "COUNTRY_NAME": "Europe",
+      "COUNTRY_ID": 6,
+      "ACTUAL_TOURNAMENT_SEASON_ID": "8W4SG7Ms",
+      "TE": "dpKqJAm1",
+      "SEASON_ID": 113,
+      "TEMPLATE_ID": "6_dpKqJAm1",
+      "STAGES": [
+        {
+          "STAGE_ID": "tvf4aF17",
+          "STAGE_NAME": "Main",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "KUh8bZGD",
+          "STAGE_NAME": "Play Offs",
+          "OUT": "2"
+        }
+      ]
+    },
+    {
+      "LEAGUE_NAME": "Ligue A",
+      "COUNTRY_NAME": "France",
+      "COUNTRY_ID": 77,
+      "ACTUAL_TOURNAMENT_SEASON_ID": "lxcbMQlj",
+      "TE": "vsToxqA5",
+      "SEASON_ID": 172,
+      "TEMPLATE_ID": "77_vsToxqA5",
+      "STAGES": [
+        {
+          "STAGE_ID": "fN4MEoiB",
+          "STAGE_NAME": "Main",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "Od9QD56H",
+          "STAGE_NAME": "Play Offs",
+          "OUT": "2"
+        },
+        {
+          "STAGE_ID": "8QdlKvkL",
+          "STAGE_NAME": "Play Out",
+          "OUT": "1"
+        }
+      ]
+    },
+    {
+      "LEAGUE_NAME": "1. Bundesliga",
+      "COUNTRY_NAME": "Germany",
+      "COUNTRY_ID": 81,
+      "ACTUAL_TOURNAMENT_SEASON_ID": "jHXqNZCp",
+      "TE": "n7WgzNvI",
+      "SEASON_ID": 172,
+      "TEMPLATE_ID": "81_n7WgzNvI",
+      "STAGES": [
+        {
+          "STAGE_ID": "j5EwS6B9",
+          "STAGE_NAME": "Losers stage",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "t6003AqC",
+          "STAGE_NAME": "Main",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "zTa42UbI",
+          "STAGE_NAME": "Play Offs",
+          "OUT": "2"
+        },
+        {
+          "STAGE_ID": "drFZSnd3",
+          "STAGE_NAME": "Winners stage",
+          "OUT": "1"
+        }
+      ]
+    },
+    {
+      "LEAGUE_NAME": "VBL Supercup",
+      "COUNTRY_NAME": "Germany",
+      "COUNTRY_ID": 81,
+      "ACTUAL_TOURNAMENT_SEASON_ID": "pO4tvgJo",
+      "TE": "IVzqtxY5",
+      "SEASON_ID": 158,
+      "TEMPLATE_ID": "81_IVzqtxY5",
+      "STAGES": [
+        {
+          "STAGE_ID": "6cAIrW5Q",
+          "STAGE_NAME": "Main",
+          "OUT": "2"
+        }
+      ]
+    },
+    {
+      "LEAGUE_NAME": "SuperLega",
+      "COUNTRY_NAME": "Italy",
+      "COUNTRY_ID": 98,
+      "ACTUAL_TOURNAMENT_SEASON_ID": "4IrHdDN5",
+      "TE": "nm8RF0ON",
+      "SEASON_ID": 172,
+      "TEMPLATE_ID": "98_nm8RF0ON",
+      "STAGES": [
+        {
+          "STAGE_ID": "l4fQE091",
+          "STAGE_NAME": "5th-10th places",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "bF1DH2Pr",
+          "STAGE_NAME": "Main",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "GjdIGMvk",
+          "STAGE_NAME": "Play Offs",
+          "OUT": "2"
+        }
+      ]
+    },
+    {
+      "LEAGUE_NAME": "Super Cup",
+      "COUNTRY_NAME": "Italy",
+      "COUNTRY_ID": 98,
+      "ACTUAL_TOURNAMENT_SEASON_ID": "bqUDvhwP",
+      "TE": "6my2FjaH",
+      "SEASON_ID": 158,
+      "TEMPLATE_ID": "98_6my2FjaH",
+      "STAGES": [
+        {
+          "STAGE_ID": "SMJq2su2",
+          "STAGE_NAME": "Main",
+          "OUT": "2"
+        }
+      ]
+    },
+    {
+      "LEAGUE_NAME": "NORCECA Championship",
+      "COUNTRY_NAME": "North & Central America",
+      "COUNTRY_ID": 2,
+      "ACTUAL_TOURNAMENT_SEASON_ID": "ELkXdPEK",
+      "TE": "U1QGYEpR",
+      "SEASON_ID": 158,
+      "TEMPLATE_ID": "2_U1QGYEpR",
+      "STAGES": [
+        {
+          "STAGE_ID": "Crw3FHWG",
+          "STAGE_NAME": "5th-8th places",
+          "OUT": "2"
+        },
+        {
+          "STAGE_ID": "CbLoHw24",
+          "STAGE_NAME": "Main",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "UZFjGcHA",
+          "STAGE_NAME": "Play Offs",
+          "OUT": "2"
+        }
+      ]
+    },
+    {
+      "LEAGUE_NAME": "PlusLiga",
+      "COUNTRY_NAME": "Poland",
+      "COUNTRY_ID": 154,
+      "ACTUAL_TOURNAMENT_SEASON_ID": "8rJspPU1",
+      "TE": "jNqF318i",
+      "SEASON_ID": 172,
+      "TEMPLATE_ID": "154_jNqF318i",
+      "STAGES": [
+        {
+          "STAGE_ID": "Sz7pTAmj",
+          "STAGE_NAME": "Main",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "n1DuiEuc",
+          "STAGE_NAME": "Placement Play Offs",
+          "OUT": "2"
+        },
+        {
+          "STAGE_ID": "6R5lSU2d",
+          "STAGE_NAME": "Play Offs",
+          "OUT": "2"
+        }
+      ]
+    },
+    {
+      "LEAGUE_NAME": "Polish Cup",
+      "COUNTRY_NAME": "Poland",
+      "COUNTRY_ID": 154,
+      "ACTUAL_TOURNAMENT_SEASON_ID": "f1Aw8SM8",
+      "TE": "6gMiRHVj",
+      "SEASON_ID": 172,
+      "TEMPLATE_ID": "154_6gMiRHVj",
+      "STAGES": [
+        {
+          "STAGE_ID": "ja5yVNOf",
+          "STAGE_NAME": "Main",
+          "OUT": "2"
+        }
+      ]
+    },
+    {
+      "LEAGUE_NAME": "Super Cup",
+      "COUNTRY_NAME": "Poland",
+      "COUNTRY_ID": 154,
+      "ACTUAL_TOURNAMENT_SEASON_ID": "jHDQ0pFr",
+      "TE": "OEACH4yF",
+      "SEASON_ID": 158,
+      "TEMPLATE_ID": "154_OEACH4yF",
+      "STAGES": [
+        {
+          "STAGE_ID": "rwAvi5oE",
+          "STAGE_NAME": "Main",
+          "OUT": "2"
+        }
+      ]
+    },
+    {
+      "LEAGUE_NAME": "Superleague",
+      "COUNTRY_NAME": "Russia",
+      "COUNTRY_ID": 158,
+      "ACTUAL_TOURNAMENT_SEASON_ID": "KQvgJDb6",
+      "TE": "bsl9acxT",
+      "SEASON_ID": 172,
+      "TEMPLATE_ID": "158_bsl9acxT",
+      "STAGES": [
+        {
+          "STAGE_ID": "6R5s64m6",
+          "STAGE_NAME": "11th-14th places",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "6slQ7QIg",
+          "STAGE_NAME": "Main",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "O2Gx7pYa",
+          "STAGE_NAME": "Qualification - Winners stage",
+          "OUT": "2"
+        },
+        {
+          "STAGE_ID": "hr4k4rII",
+          "STAGE_NAME": "Winners stage",
+          "OUT": "1"
+        }
+      ]
+    },
+    {
+      "LEAGUE_NAME": "Russia Cup",
+      "COUNTRY_NAME": "Russia",
+      "COUNTRY_ID": 158,
+      "ACTUAL_TOURNAMENT_SEASON_ID": "8YT7Leas",
+      "TE": "WrtGkuwg",
+      "SEASON_ID": 172,
+      "TEMPLATE_ID": "158_WrtGkuwg",
+      "STAGES": [
+        {
+          "STAGE_ID": "rHYNeTJs",
+          "STAGE_NAME": "Final Four",
+          "OUT": "2"
+        },
+        {
+          "STAGE_ID": "bR7nFHK2",
+          "STAGE_NAME": "Main",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "Wv6fDekF",
+          "STAGE_NAME": "Preliminary",
+          "OUT": "1"
+        }
+      ]
+    },
+    {
+      "LEAGUE_NAME": "Super Cup",
+      "COUNTRY_NAME": "Russia",
+      "COUNTRY_ID": 158,
+      "ACTUAL_TOURNAMENT_SEASON_ID": "ClJrFp4b",
+      "TE": "GpBnHpM8",
+      "SEASON_ID": 113,
+      "TEMPLATE_ID": "158_GpBnHpM8",
+      "STAGES": [
+        {
+          "STAGE_ID": "rFhpSscn",
+          "STAGE_NAME": "Main",
+          "OUT": "2"
+        }
+      ]
+    },
+    {
+      "LEAGUE_NAME": "World Championship",
+      "COUNTRY_NAME": "World",
+      "COUNTRY_ID": 8,
+      "ACTUAL_TOURNAMENT_SEASON_ID": "tfKKT1S9",
+      "TE": "hjY9yg16",
+      "SEASON_ID": 156,
+      "TEMPLATE_ID": "8_hjY9yg16",
+      "STAGES": [
+        {
+          "STAGE_ID": "vR4rubYQ",
+          "STAGE_NAME": "First round",
+          "OUT": "1"
+        }
+      ]
+    },
+    {
+      "LEAGUE_NAME": "World Championship Women",
+      "COUNTRY_NAME": "World",
+      "COUNTRY_ID": 8,
+      "ACTUAL_TOURNAMENT_SEASON_ID": "zRKbbo7U",
+      "TE": "QH1jNi77",
+      "SEASON_ID": 156,
+      "TEMPLATE_ID": "8_QH1jNi77",
+      "STAGES": [
+        {
+          "STAGE_ID": "WtuQ8sh8",
+          "STAGE_NAME": "First round",
+          "OUT": "1"
+        }
+      ]
+    },
+    {
+      "LEAGUE_NAME": "Olympic Games",
+      "COUNTRY_NAME": "World",
+      "COUNTRY_ID": 8,
+      "ACTUAL_TOURNAMENT_SEASON_ID": "AuPuP0Fd",
+      "TE": "bV7lrATG",
+      "SEASON_ID": 33,
+      "TEMPLATE_ID": "8_bV7lrATG",
+      "STAGES": [
+        {
+          "STAGE_ID": "hGfWogW1",
+          "STAGE_NAME": "Final tournament - Main",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "xUeR9dO8",
+          "STAGE_NAME": "Qualification - Main",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "MokubGwF",
+          "STAGE_NAME": "Qualification - Main",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "0xlqczgL",
+          "STAGE_NAME": "Qualification - Main",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "OvgOiEGr",
+          "STAGE_NAME": "Qualification - Main",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "I1hSjYVl",
+          "STAGE_NAME": "Qualification - Main",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "ShZx1hSR",
+          "STAGE_NAME": "Qualification - Main",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "bwcNAx92",
+          "STAGE_NAME": "Final tournament - Play Offs",
+          "OUT": "2"
+        },
+        {
+          "STAGE_ID": "r1wldf8R",
+          "STAGE_NAME": "Qualification - Play Offs",
+          "OUT": "2"
+        },
+        {
+          "STAGE_ID": "YJqDdCzq",
+          "STAGE_NAME": "Qualification - Play Offs",
+          "OUT": "2"
+        }
+      ]
+    },
+    {
+      "LEAGUE_NAME": "Olympic Games Women",
+      "COUNTRY_NAME": "World",
+      "COUNTRY_ID": 8,
+      "ACTUAL_TOURNAMENT_SEASON_ID": "IVDUXhJd",
+      "TE": "8dsUpCqb",
+      "SEASON_ID": 33,
+      "TEMPLATE_ID": "8_8dsUpCqb",
+      "STAGES": [
+        {
+          "STAGE_ID": "WEu1kWF7",
+          "STAGE_NAME": "Final tournament - Main",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "0AeeDZ7E",
+          "STAGE_NAME": "Qualification - Main",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "MPq4BDxR",
+          "STAGE_NAME": "Qualification - Main",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "hCWi8Xpr",
+          "STAGE_NAME": "Qualification - Main",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "zLg47i0l",
+          "STAGE_NAME": "Qualification - Main",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "Iqq96BFf",
+          "STAGE_NAME": "Qualification - Main",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "WnmD5VU0",
+          "STAGE_NAME": "Qualification - Main",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "lzhiEFh8",
+          "STAGE_NAME": "Final tournament - Play Offs",
+          "OUT": "2"
+        },
+        {
+          "STAGE_ID": "rZp0CgNK",
+          "STAGE_NAME": "Qualification - Play Offs",
+          "OUT": "2"
+        },
+        {
+          "STAGE_ID": "Q9nH4kp7",
+          "STAGE_NAME": "Qualification - Play Offs",
+          "OUT": "2"
+        }
+      ]
+    },
+    {
+      "LEAGUE_NAME": "Nations League",
+      "COUNTRY_NAME": "World",
+      "COUNTRY_ID": 8,
+      "ACTUAL_TOURNAMENT_SEASON_ID": "ji0804ui",
+      "TE": "Sp51ptwk",
+      "SEASON_ID": 156,
+      "TEMPLATE_ID": "8_Sp51ptwk",
+      "STAGES": [
+        {
+          "STAGE_ID": "2cqL8WIn",
+          "STAGE_NAME": "Main",
+          "OUT": "1"
+        }
+      ]
+    },
+    {
+      "LEAGUE_NAME": "Club World Championship",
+      "COUNTRY_NAME": "World",
+      "COUNTRY_ID": 8,
+      "ACTUAL_TOURNAMENT_SEASON_ID": "fkKQAvuh",
+      "TE": "QuxS0ahA",
+      "SEASON_ID": 158,
+      "TEMPLATE_ID": "8_QuxS0ahA",
+      "STAGES": [
+        {
+          "STAGE_ID": "bTpPtwtE",
+          "STAGE_NAME": "Main",
+          "OUT": "1"
+        },
+        {
+          "STAGE_ID": "xKqTuceK",
+          "STAGE_NAME": "Play Offs",
+          "OUT": "2"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,253 @@
+package de.p10r
+
+import org.http4k.core.HttpHandler
+import org.http4k.core.Request
+import org.http4k.core.Response
+import org.http4k.core.Status
+import org.http4k.server.SunHttp
+import org.http4k.server.asServer
+
+fun main() {
+    FakeFlashScoreApi().asServer(SunHttp(port = 0)).start().also {
+        println("FlashScore Fake Api started at port ${it.port()}")
+    }
+}
+
+class FakeFlashScoreApi : HttpHandler {
+    val receivedRequests = mutableListOf<Request>()
+
+    override fun invoke(req: Request): Response = when {
+        req.hasApiKeyHeader() -> successResponse
+        else                  -> missingHeaderResponse
+    }.also { receivedRequests.add(req) }
+
+    fun Request.hasApiKeyHeader() = !header("X-RapidAPI-Key").isNullOrBlank()
+
+    val missingHeaderResponse = Response(Status.UNAUTHORIZED).body("""
+                {
+                    "message": "Invalid API key. Go to https://docs.rapidapi.com/docs/keys for more info."
+                }
+            """.trimIndent()
+    )
+    val successResponse = Response(Status.OK).body("""
+            {
+              "DATA": [
+                {
+                  "NAME": "Poland: PlusLiga - Play Offs",
+                  "HEADER": "Poland: PlusLiga - Play Offs",
+                  "NAME_PART_1": "Asia",
+                  "NAME_PART_2": "Asian Club Championship Women",
+                  "TOURNAMENT_TEMPLATE_ID": "nyHsJ12E",
+                  "COUNTRY_ID": 5,
+                  "COUNTRY_NAME": "Asia",
+                  "TOURNAMENT_STAGE_ID": "CKpHJryH",
+                  "TOURNAMENT_TYPE": "p",
+                  "TOURNAMENT_ID": "nic925OJ",
+                  "SOURCE_TYPE": 0,
+                  "HAS_LIVE_TABLE": 0,
+                  "STANDING_INFO": 1,
+                  "TEMPLATE_ID": "5_nyHsJ12E",
+                  "TOURNAMENT_STAGE_TYPE": 2,
+                  "SHORT_NAME": "Asian Club Championship Women",
+                  "URL": "/volleyball/asia/asian-club-championship-women/",
+                  "TOURNAMENT_IMAGE": "https://www.flashscore.com/res/image/data/xIMnKi7j-rDO3Ooe5.png",
+                  "SORT": "33Asia        004......0100000000001000Asian Club C029 Women000",
+                  "STAGES_COUNT": 0,
+                  "ZKL": "",
+                  "ZKU": "",
+                  "TOURNAMENT_SEASON_ID": "nic925OJ",
+                  "CATEGORY_NAME": "Asia",
+                  "EVENTS": [
+                    {
+                      "EVENT_ID": "jkaD9KGf",
+                      "START_TIME": 1650949200,
+                      "START_UTIME": 1650949200,
+                      "STAGE_TYPE": "FINISHED",
+                      "MERGE_STAGE_TYPE": "FINISHED",
+                      "STAGE": "FINISHED",
+                      "SORT": "Kashan W (Irn)",
+                      "VISIBLE_RUN_RATE": 0,
+                      "HAS_LINEPS": 0,
+                      "STAGE_START_TIME": 1650955489,
+                      "GAME_TIME": "-1",
+                      "RECENT_OVERS": null,
+                      "SHORTNAME_HOME": "KAS",
+                      "HOME_PARTICIPANT_IDS": [
+                        "U7t3ucge"
+                      ],
+                      "HOME_PARTICIPANT_TYPES": [
+                        1
+                      ],
+                      "HOME_NAME": "Kashan W (Irn)",
+                      "FH": "Kashan W (Irn)",
+                      "HOME_EVENT_PARTICIPANT_ID": "CbudH4a0",
+                      "HOME_GOAL_VAR": 0,
+                      "HOME_SCORE_CURRENT": "0",
+                      "HOME_SCORE_PART_1": "22",
+                      "HOME_SCORE_PART_2": "20",
+                      "HOME_SCORE_PART_3": "21",
+                      "HOME_IMAGES": [
+                        "https://www.flashscore.com/res/image/data/GG3P0FyB-Kd2yaibq.png"
+                      ],
+                      "IMM": "8hhfsJOr",
+                      "IMW": "100",
+                      "IMP": "QV8fb7cM-IVztZr2I.png",
+                      "IME": "",
+                      "SHORTNAME_AWAY": "DIA",
+                      "AWAY_PARTICIPANT_IDS": [
+                        "8hhfsJOr"
+                      ],
+                      "AWAY_PARTICIPANT_TYPES": [
+                        1
+                      ],
+                      "AWAY_NAME": "Diamond Food W (Tha)",
+                      "FK": "Diamond Food W (Tha)",
+                      "AWAY_EVENT_PARTICIPANT_ID": "jkv0GOE6",
+                      "WINNER": 2,
+                      "ODDS_WINNER": 2,
+                      "ODDS_WINNER_OUTCOME": 2,
+                      "AWAY_GOAL_VAR": 0,
+                      "AWAY_SCORE_CURRENT": "3",
+                      "AWAY_SCORE_PART_1": "25",
+                      "AWAY_SCORE_PART_2": "25",
+                      "AWAY_SCORE_PART_3": "25",
+                      "AWAY_IMAGES": [
+                        "https://www.flashscore.com/res/image/data/QV8fb7cM-IVztZr2I.png"
+                      ]
+                    },
+                    {
+                      "EVENT_ID": "UubH8vW0",
+                      "START_TIME": 1650960000,
+                      "START_UTIME": 1650960000,
+                      "STAGE_TYPE": "FINISHED",
+                      "MERGE_STAGE_TYPE": "FINISHED",
+                      "STAGE": "FINISHED",
+                      "SORT": "Kuanysh W (Kaz)",
+                      "VISIBLE_RUN_RATE": 0,
+                      "HAS_LINEPS": 0,
+                      "STAGE_START_TIME": 1650964061,
+                      "GAME_TIME": "-1",
+                      "RECENT_OVERS": null,
+                      "SHORTNAME_HOME": "KUA",
+                      "HOME_PARTICIPANT_IDS": [
+                        "QwPP0Qzj"
+                      ],
+                      "HOME_PARTICIPANT_TYPES": [
+                        1
+                      ],
+                      "HOME_NAME": "Kuanysh W (Kaz)",
+                      "FH": "Kuanysh W (Kaz)",
+                      "HOME_EVENT_PARTICIPANT_ID": "pCw4FrUC",
+                      "WINNER": 1,
+                      "ODDS_WINNER": 1,
+                      "ODDS_WINNER_OUTCOME": 1,
+                      "HOME_GOAL_VAR": 0,
+                      "HOME_SCORE_CURRENT": "3",
+                      "HOME_SCORE_PART_1": "25",
+                      "HOME_SCORE_PART_2": "25",
+                      "HOME_SCORE_PART_3": "25",
+                      "HOME_IMAGES": [
+                        "https://www.flashscore.com/res/image/data/0IIwTbCr-QoVmbGSI.png"
+                      ],
+                      "IMM": "CQL9fcqQ",
+                      "IMW": "100",
+                      "IMP": "QgrBggHG-IejGZ82T.png",
+                      "IME": "",
+                      "SHORTNAME_AWAY": "KYR",
+                      "AWAY_PARTICIPANT_IDS": [
+                        "CQL9fcqQ"
+                      ],
+                      "AWAY_PARTICIPANT_TYPES": [
+                        17
+                      ],
+                      "AWAY_NAME": "Kyrgyzstan W (Asi)",
+                      "FK": "Kyrgyzstan W (Asi)",
+                      "AWAY_EVENT_PARTICIPANT_ID": "bFs8E2qJ",
+                      "AWAY_GOAL_VAR": 0,
+                      "AWAY_SCORE_CURRENT": "0",
+                      "AWAY_SCORE_PART_1": "12",
+                      "AWAY_SCORE_PART_2": "8",
+                      "AWAY_SCORE_PART_3": "12",
+                      "AWAY_IMAGES": [
+                        "https://www.flashscore.com/res/image/data/QgrBggHG-IejGZ82T.png"
+                      ]
+                    },
+                    {
+                      "EVENT_ID": "nHhM7bo7",
+                      "START_TIME": 1650970800,
+                      "START_UTIME": 1650970800,
+                      "STAGE_TYPE": "FINISHED",
+                      "MERGE_STAGE_TYPE": "FINISHED",
+                      "STAGE": "FINISHED",
+                      "SORT": "Jizzakh State W (Uzb)",
+                      "VISIBLE_RUN_RATE": 0,
+                      "HAS_LINEPS": 0,
+                      "STAGE_START_TIME": 1650974555,
+                      "GAME_TIME": "-1",
+                      "RECENT_OVERS": null,
+                      "SHORTNAME_HOME": "JPI",
+                      "HOME_PARTICIPANT_IDS": [
+                        "jHsatwvk"
+                      ],
+                      "HOME_PARTICIPANT_TYPES": [
+                        1
+                      ],
+                      "HOME_NAME": "Jizzakh State W (Uzb)",
+                      "FH": "Jizzakh State W (Uzb)",
+                      "HOME_EVENT_PARTICIPANT_ID": "CIVkwnMJ",
+                      "HOME_GOAL_VAR": 0,
+                      "HOME_SCORE_CURRENT": "0",
+                      "HOME_SCORE_PART_1": "4",
+                      "HOME_SCORE_PART_2": "11",
+                      "HOME_SCORE_PART_3": "11",
+                      "HOME_IMAGES": [
+                        "https://www.flashscore.com/res/image/data/dSn48ujl-YgDRpjF5.png"
+                      ],
+                      "IMM": "4UNTapjd",
+                      "IMW": "100",
+                      "IMP": "hGTlKxhl-hWcS9SYG.png",
+                      "IME": "",
+                      "SHORTNAME_AWAY": "ALT",
+                      "AWAY_PARTICIPANT_IDS": [
+                        "4UNTapjd"
+                      ],
+                      "AWAY_PARTICIPANT_TYPES": [
+                        1
+                      ],
+                      "AWAY_NAME": "Altai W (Kaz)",
+                      "FK": "Altai W (Kaz)",
+                      "AWAY_EVENT_PARTICIPANT_ID": "j9Ugx6yQ",
+                      "WINNER": 2,
+                      "ODDS_WINNER": 2,
+                      "ODDS_WINNER_OUTCOME": 2,
+                      "AWAY_GOAL_VAR": 0,
+                      "AWAY_SCORE_CURRENT": "3",
+                      "AWAY_SCORE_PART_1": "25",
+                      "AWAY_SCORE_PART_2": "25",
+                      "AWAY_SCORE_PART_3": "25",
+                      "AWAY_IMAGES": [
+                        "https://www.flashscore.com/res/image/data/hGTlKxhl-hWcS9SYG.png"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "META": {
+                "BOOKMAKERS": [
+                  {
+                    "BOOKMAKER_ID": 16,
+                    "BOOKMAKER_BETTING_TYPE": 3,
+                    "BOOKMAKER_NAME": "bet365"
+                  },
+                  {
+                    "BOOKMAKER_ID": 49,
+                    "BOOKMAKER_BETTING_TYPE": 3,
+                    "BOOKMAKER_NAME": "Tipsport.cz"
+                  }
+                ]
+              },
+              "LAST_CHANGE_KEY": "36222388a4ad11c3060a2973bf328c61"
+            }
+        """.trimIndent())
+
+}

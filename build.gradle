@@ -1,0 +1,58 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
+    }
+}
+
+apply plugin: 'application'
+
+mainClassName = "de.p10r.serveKt"
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'kotlin'
+
+compileKotlin.kotlinOptions.jvmTarget = "11"
+compileTestKotlin.kotlinOptions.jvmTarget = "11"
+compileTestKotlin.kotlinOptions.freeCompilerArgs += "-Xjvm-default=all"
+
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    implementation "com.amazonaws:aws-lambda-java-events:3.11.0"
+    implementation "org.http4k:http4k-cloudnative:${http4kVersion}"
+    implementation "org.http4k:http4k-core:${http4kVersion}"
+    implementation "org.http4k:http4k-format-moshi:${http4kVersion}"
+    implementation "org.http4k:http4k-serverless-core:${http4kVersion}"
+    implementation "org.http4k:http4k-serverless-lambda:${http4kVersion}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}"
+    testImplementation "org.http4k:http4k-testing-approval:${http4kVersion}"
+    testImplementation "org.http4k:http4k-testing-chaos:${http4kVersion}"
+    testImplementation "org.http4k:http4k-testing-hamkrest:${http4kVersion}"
+    testImplementation "org.http4k:http4k-testing-kotest:${http4kVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+    testImplementation "io.kotest:kotest-assertions-core:${kotestVersion}"
+}
+
+task buildLambdaZip(type: Zip) {
+    from compileKotlin
+    from processResources
+    into('lib') {
+        from configurations.compileClasspath
+    }
+}

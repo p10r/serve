@@ -13,17 +13,20 @@ follow [this](https://www.http4k.org/guide/tutorials/serverless_http4k_with_aws_
 - [Invoking Lambda Functions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/RunLambdaSchedule.html#schedule-create-rule)
 
 ## Configuring Env Variables
-```
-aws lambda update-function-configuration --function-name serve-0ced699 \
-    --environment "Variables={ \
-    DISCORD_URI=http://uri,\
-    FLASH_SCORE_URI=https://uri,\
-    FLASH_SCORE_API_KEY=<YOU_SECRET_HERE>\
-    }"
 
+Create a file called `env.ts` in the root of the project with the following content:
+
+```typescript
+export const envVariables = {
+    variables: {
+        DISCORD_URI: "<YOUR-DISCORD-URL>",
+        FLASH_SCORE_URI: "<YOUR-FLASHSCORE-URI>",
+        FLASH_SCORE_API_KEY: "<YOUR-FLASHSCORE-API-KEY>",
+    },
+}
 ```
 
-## Package
+## Deployment
 
 ```
 ./gradlew buildLambdaZip && pulumi up --stack dev --yes

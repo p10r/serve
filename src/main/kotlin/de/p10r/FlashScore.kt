@@ -18,13 +18,9 @@ class FlashScoreApi(
             .header("X-RapidAPI-Host", "flashscore.p.rapidapi.com")
             .header("X-RapidAPI-Key", apiKey)
 
-        val response = flashScoreClient(req)
-        println("response!")
-        //response is returned
-        val body = bodyFrom(response)
-        //we never reach this point
-        println("deserialized!")
-        return body.toSchedules()
+        return flashScoreClient(req)
+            .let(bodyFrom)
+            .toSchedules()
     }
 }
 

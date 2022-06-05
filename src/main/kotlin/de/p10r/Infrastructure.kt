@@ -1,18 +1,39 @@
 package de.p10r
 
+import com.amazonaws.services.lambda.runtime.Context
+import com.amazonaws.services.lambda.runtime.events.ScheduledEvent
 import org.http4k.client.JavaHttpClient
+import org.http4k.core.HttpHandler
 import org.http4k.core.Uri
 import org.http4k.core.then
 import org.http4k.filter.ClientFilters
 import org.http4k.filter.DebuggingFilters
-import org.http4k.serverless.ApiGatewayV1LambdaFunction
-import org.http4k.serverless.AppLoader
+import org.http4k.serverless.AwsLambdaEventFunction
+import org.http4k.serverless.FnHandler
+import org.http4k.serverless.FnLoader
 
 
+//Http trigger
+//@Suppress("unused")
+//class ServeAppFunction : ApiGatewayV1LambdaFunction(AppLoader { env: Map<String, String> ->
+//    ProdApp(env).routes()
+//})
+
+//Event trigger
 @Suppress("unused")
-class ServeAppFunction : ApiGatewayV1LambdaFunction(AppLoader { env: Map<String, String> ->
-    ProdApp(env).routes()
-})
+class ServeAppFunction : AwsLambdaEventFunction(EventFnLoader(JavaHttpClient()))
+
+// The FnLoader is responsible for constructing the handler and for handling the serialisation of the request and response
+fun EventFnLoader(http: HttpHandler) = FnLoader { env: Map<String, String> ->
+    println("in EventFnLoader")
+    EventHandler(ProdApp(env))
+}
+
+fun EventHandler(app: App) = FnHandler { _: ScheduledEvent, _: Context ->
+    println("starting workflow")
+    app.run()
+}
+
 
 fun ProdApp(env: Map<String, String>): App {
     val flashScoreUri = env["FLASH_SCORE_URI"]

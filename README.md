@@ -29,6 +29,6 @@ export const envVariables = {
 ## Deployment
 
 ```
-./gradlew buildLambdaZip && pulumi up --stack dev --yes
+./deploy.sh
 ```
 

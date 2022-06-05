@@ -3,7 +3,7 @@ package de.p10r
 import io.kotest.matchers.collections.shouldContainExactly
 import org.junit.jupiter.api.Test
 
-class FilterFavouritesTest {
+class FilterSchedulesTest {
 
     @Test
     fun `removes all non-favoured leagues`() {
@@ -19,6 +19,12 @@ class FilterFavouritesTest {
             Schedule("Italian Playoffs", emptyList()),
             Schedule("Polish Playoffs", emptyList())
         )
+    }
+
+    @Test
+    fun `removes all cancelled games`() {
+        TODO()
+        //"STAGE": "CANCELED",
     }
 }
 

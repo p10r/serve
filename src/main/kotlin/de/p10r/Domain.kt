@@ -25,6 +25,8 @@ private val favouriteLeagues = listOf(
     "Poland: PlusLiga - Play Offs",
     "France: Ligue A - Play Offs",
     "Russia: Superleague - Play Offs",
+    "World: Nations League",
+    "World: Nations League Women",
 //    "European Championships",
 //    "Champions League",
 //    "CEV Cup",

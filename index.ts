@@ -31,7 +31,7 @@ const lambdaFunction = new aws.lambda.Function("serve", {
     handler: "de.p10r.ServeAppFunction",
     role: defaultRole.arn,
     runtime: "java11",
-    timeout: 7,
+    timeout: 60,
     memorySize: 512,
     environment: envVariables
 });

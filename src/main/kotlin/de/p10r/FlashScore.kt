@@ -35,12 +35,15 @@ private data class RawFlashScoreResponse(
             val FH: String,
             val FK: String,
             val START_TIME: Long,
-        )
+        val STAGE: String,
+        ) {
+            val isCanceled: Boolean = STAGE == "CANCELED"
+        }
     }
 }
 
 private fun RawFlashScoreResponse.toSchedules() = Schedules(map { Schedule(it.NAME, it.EVENTS.toGames()) })
 
 private fun List<RawFlashScoreResponse.League.Event>.toGames() = map {
-    Game(Instant.ofEpochSecond(it.START_TIME), it.FH, it.FK)
+    Game(Instant.ofEpochSecond(it.START_TIME), it.FH, it.FK, it.isCanceled)
 }

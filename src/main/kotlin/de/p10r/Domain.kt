@@ -15,6 +15,7 @@ data class Game(
     val time: Instant,
     val homeTeam: String,
     val awayTeam: String,
+    val isCanceled: Boolean,
 )
 
 fun Schedules.filterFavourites(favourites: List<String> = favouriteLeagues) =

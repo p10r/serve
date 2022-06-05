@@ -1,6 +1,7 @@
 package de.p10r
 
 import io.kotest.matchers.collections.shouldContainExactly
+import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
 class FilterSchedulesTest {
@@ -23,8 +24,17 @@ class FilterSchedulesTest {
 
     @Test
     fun `removes all cancelled games`() {
-        TODO()
-        //"STAGE": "CANCELED",
+        val games = scheduleOf(
+            listOf(
+                gameOf(isCanceled = true),
+                gameOf(homeTeam = "Lube", awayTeam = "Modena")
+            ),
+            "league name",
+        )
+
+        games.removeCancelledGames().games shouldBe listOf(gameOf(homeTeam = "Lube", awayTeam = "Modena"))
     }
 }
+
+private fun Schedule.removeCancelledGames() = Schedule(leagueName, games.filterNot { it.isCanceled })
 

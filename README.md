@@ -40,4 +40,5 @@ The script expects that Gradle is [installed](https://sdkman.io/install).
 ## TODO
 
 Create scheduled CloudWatch event via pulumi
+Compile with [graalvm](https://www.http4k.org/guide/tutorials/going_native_with_graal_on_aws_lambda/)
 

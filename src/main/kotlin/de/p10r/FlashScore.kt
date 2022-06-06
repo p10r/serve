@@ -2,7 +2,7 @@ package de.p10r
 
 import org.http4k.core.Body
 import org.http4k.core.HttpHandler
-import org.http4k.core.Method
+import org.http4k.core.Method.GET
 import org.http4k.core.Request
 import org.http4k.format.Moshi.auto
 import java.time.Instant
@@ -13,12 +13,17 @@ class FlashScoreApi(
 ) {
     private val bodyFrom = Body.auto<RawFlashScoreResponse>().toLens()
 
-    fun fetchSchedule(): Schedules {
-        val req = Request(Method.GET, "/v1/events/list?locale=en_GB&timezone=-4&sport_id=12&indent_days=0")
+    fun fetchSchedules(): Schedules {
+        val req = Request(GET, "/v1/events/list?locale=en_GB&timezone=-4&sport_id=12&indent_days=0")
             .header("X-RapidAPI-Host", "flashscore.p.rapidapi.com")
             .header("X-RapidAPI-Key", apiKey)
 
-        return flashScoreClient(req)
+        val response = flashScoreClient(req)
+
+        if (!response.status.successful)
+            throw RuntimeException("Error when calling flashscore: ${response.status} - ${response.bodyString()}")
+
+        return response
             .let(bodyFrom)
             .toSchedules()
     }
@@ -35,7 +40,7 @@ private data class RawFlashScoreResponse(
             val FH: String,
             val FK: String,
             val START_TIME: Long,
-        val STAGE: String,
+            val STAGE: String,
         ) {
             val isCanceled: Boolean = STAGE == "CANCELED"
         }

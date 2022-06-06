@@ -1,16 +1,15 @@
 package de.p10r
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldHaveSize
-import org.http4k.core.Status
-import org.http4k.kotest.shouldHaveStatus
 import org.junit.jupiter.api.Test
 
 class E2ETest {
     @Test
     fun `publishes a discord message`() {
         with(Fixture()) {
-            trigger()
+            run()
             discord.recordedRequests shouldHaveSize 1
         }
     }
@@ -18,9 +17,12 @@ class E2ETest {
     @Test
     fun `forwards flash score api error`() {
         with(Fixture.withOutApiKey()) {
-            val response = trigger()
+            shouldThrow<RuntimeException> {
+                run()
+            }
             discord.recordedRequests.shouldBeEmpty()
-            response shouldHaveStatus Status.INTERNAL_SERVER_ERROR
         }
     }
+
+    fun Fixture.Companion.withOutApiKey() = Fixture("")
 }

@@ -7,6 +7,6 @@ class FetchScheduleTest {
     @Test
     fun `should return today's schedule`() {
         val api = FlashScoreApi(FakeFlashScoreApi(), "apiKey")
-        api.fetchSchedule().shouldNotBeEmpty()
+        api.fetchSchedules().shouldNotBeEmpty()
     }
 }

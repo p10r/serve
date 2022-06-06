@@ -1,5 +1,8 @@
 # serve
 
+Serverless function running on AWS Lambda to publish today's games for a given list of volleyball leagues to a discord
+server.
+
 ## Requirements
 
 For deployment, an installation of node is needed.
@@ -28,7 +31,13 @@ export const envVariables = {
 
 ## Deployment
 
+The script expects that Gradle is [installed](https://sdkman.io/install). 
+
 ```
 ./deploy.sh
 ```
+
+## TODO
+
+Create scheduled CloudWatch event via pulumi
 

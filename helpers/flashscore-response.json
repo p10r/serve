@@ -1,0 +1,144 @@
+{
+  "DATA": [
+    {
+      "NAME": "Austria: AVL",
+      "HEADER": "Austria: AVL;183;SEmfFHs3",
+      "NAME_PART_1": "Austria",
+      "NAME_PART_2": "AVL",
+      "TOURNAMENT_TEMPLATE_ID": "rw2VDbDF",
+      "COUNTRY_ID": 25,
+      "COUNTRY_NAME": "Austria",
+      "TOURNAMENT_STAGE_ID": "SEmfFHs3",
+      "TOURNAMENT_TYPE": "p",
+      "TOURNAMENT_ID": "hdSyUaJG",
+      "SOURCE_TYPE": 0,
+      "HAS_LIVE_TABLE": 0,
+      "STANDING_INFO": 1,
+      "TEMPLATE_ID": "25_rw2VDbDF",
+      "TOURNAMENT_STAGE_TYPE": 2,
+      "SHORT_NAME": "AVL",
+      "URL": "/volleyball/austria/avl/",
+      "TOURNAMENT_IMAGE": "https://www.flashscore.com/res/image/data/vH9EDhmd-Kxl1E0Y5.png",
+      "SORT": "33Austria     007ustria0000000000001000AVL         003......000",
+      "STAGES_COUNT": 0,
+      "ZKL": "",
+      "ZKU": "",
+      "TOURNAMENT_SEASON_ID": "hdSyUaJG",
+      "CATEGORY_NAME": "Austria",
+      "EVENTS": [
+        {
+          "EVENT_ID": "MaMxknQa",
+          "START_TIME": 1697898600,
+          "START_UTIME": 1697898600,
+          "STAGE_TYPE": "FINISHED",
+          "MERGE_STAGE_TYPE": "FINISHED",
+          "STAGE": "FINISHED",
+          "SORT": "Sokol Wien",
+          "ROUND": "Round 4",
+          "VISIBLE_RUN_RATE": 0,
+          "HAS_LINEPS": 0,
+          "STAGE_START_TIME": 1697906079,
+          "GAME_TIME": "-1",
+          "PLAYING_ON_SETS": null,
+          "RECENT_OVERS": null,
+          "SHORTNAME_HOME": "SOK",
+          "HOME_PARTICIPANT_IDS": [
+            "EqxX2Ojj"
+          ],
+          "HOME_PARTICIPANT_TYPES": [
+            1
+          ],
+          "HOME_NAME": "Sokol Wien",
+          "HOME_PARTICIPANT_NAME_ONE": "Sokol Wien",
+          "HOME_EVENT_PARTICIPANT_ID": "G8X3APoK",
+          "WINNER": 1,
+          "ODDS_WINNER": 1,
+          "ODDS_WINNER_OUTCOME": 1,
+          "HOME_GOAL_VAR": 0,
+          "HOME_SCORE_CURRENT": "3",
+          "HOME_SCORE_PART_1": "25",
+          "HOME_SCORE_PART_2": "25",
+          "HOME_SCORE_PART_3": "23",
+          "HOME_SCORE_PART_4": "25",
+          "HOME_IMAGES": [
+            "https://www.flashscore.com/res/image/data/bkKWLbyS-Odq7Mhlo.png"
+          ],
+          "IMM": "GI1dOqrM",
+          "IMW": "100",
+          "IMP": "xzcad8GG-rmqCq0O8.png",
+          "IME": "",
+          "SHORTNAME_AWAY": "KLA",
+          "AWAY_PARTICIPANT_IDS": [
+            "GI1dOqrM"
+          ],
+          "AWAY_PARTICIPANT_TYPES": [
+            1
+          ],
+          "AWAY_NAME": "VBK Klagenfurt",
+          "AWAY_PARTICIPANT_NAME_ONE": "VBK Klagenfurt",
+          "AWAY_EVENT_PARTICIPANT_ID": "OYW79q1Q",
+          "AWAY_GOAL_VAR": 0,
+          "AWAY_SCORE_CURRENT": "1",
+          "AWAY_SCORE_FULL": 1,
+          "AWAY_SCORE_PART_1": "20",
+          "AWAY_SCORE_PART_2": "21",
+          "AWAY_SCORE_PART_3": "25",
+          "AWAY_SCORE_PART_4": "15",
+          "AWAY_IMAGES": [
+            "https://www.flashscore.com/res/image/data/xzcad8GG-rmqCq0O8.png"
+          ]
+        },
+        {
+          "EVENT_ID": "x0YbCjcE",
+          "START_TIME": 1697965200,
+          "START_UTIME": 1697965200,
+          "STAGE_TYPE": "SCHEDULED",
+          "MERGE_STAGE_TYPE": "SCHEDULED",
+          "STAGE": "SCHEDULED",
+          "SORT": "Wolfurt",
+          "VISIBLE_RUN_RATE": 0,
+          "HAS_LINEPS": 0,
+          "GAME_TIME": "-1",
+          "PLAYING_ON_SETS": null,
+          "RECENT_OVERS": null,
+          "SHORTNAME_HOME": "WOL",
+          "HOME_PARTICIPANT_IDS": [
+            "zcU2ghjJ"
+          ],
+          "HOME_PARTICIPANT_TYPES": [
+            1
+          ],
+          "HOME_NAME": "Wolfurt",
+          "HOME_PARTICIPANT_NAME_ONE": "Wolfurt",
+          "HOME_EVENT_PARTICIPANT_ID": "Kzg8rgZ2",
+          "HOME_GOAL_VAR": 0,
+          "HOME_IMAGES": [
+            "https://www.flashscore.com/res/image/data/6TCPOsZA-Kve6gfCq.png"
+          ],
+          "IMM": "Me2hPPSF",
+          "IMW": "100",
+          "IMP": "zayoiNjl-EmLkMDoe.png",
+          "IME": "",
+          "SHORTNAME_AWAY": "HOT",
+          "AWAY_PARTICIPANT_IDS": [
+            "Me2hPPSF"
+          ],
+          "AWAY_PARTICIPANT_TYPES": [
+            1
+          ],
+          "AWAY_NAME": "hotVolleys",
+          "AWAY_PARTICIPANT_NAME_ONE": "hotVolleys",
+          "AWAY_EVENT_PARTICIPANT_ID": "EchCsDl9",
+          "AWAY_GOAL_VAR": 0,
+          "AWAY_IMAGES": [
+            "https://www.flashscore.com/res/image/data/zayoiNjl-EmLkMDoe.png"
+          ],
+          "AN": "n",
+          "LIVE_IN_OFFER_BOOKMAKER_ID": 645,
+          "LIVE_IN_OFFER_STATUS": 0
+        }
+      ],
+      "LAST_CHANGE_KEY": "9ff831688077ccafb9b7b5dd7527e1b4"
+    }
+  ]
+}

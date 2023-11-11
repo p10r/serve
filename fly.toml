@@ -1,0 +1,7 @@
+# fly.toml app configuration file generated for serve on 2023-11-05T18:35:55+01:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "serve"
+primary_region = "ams"

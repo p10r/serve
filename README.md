@@ -3,6 +3,7 @@
 Get the schedule your favourite volleyball leagues straight to your discord channel of choice.
 
 The outcome looks as such:
+
 ![img.png](img.png)
 
 ## Deployment

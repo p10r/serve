@@ -79,10 +79,10 @@ func hour(unixTs int64) string {
 		name     string
 		location *time.Location
 	}{
-		{"BER", time.FixedZone("BER", 1*60*60)}, // Berlin (UTC+1)
-		{"NY", time.FixedZone("NY", -5*60*60)},  // New York (UTC-5)
-		{"LA", time.FixedZone("LA", -8*60*60)},  // Los Angeles (UTC-8)
-		{"HK", time.FixedZone("HK", 8*60*60)},   // Hong Kong (UTC+8)
+		{"BER", time.FixedZone("Europe/Berlin", 1*60*60)},
+		{"NY", time.FixedZone("America/New_York", -5*60*60)},
+		{"LA", time.FixedZone("America/Los_Angeles", -8*60*60)},
+		{"HK", time.FixedZone("Asia/Hong_Kong", 8*60*60)},
 	}
 
 	formattedTimes := make([]string, len(locations))

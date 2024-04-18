@@ -1,6 +1,7 @@
 package flashscore
 
 import (
+	"errors"
 	"fmt"
 	"log"
 	"net"
@@ -51,12 +52,16 @@ func (c Client) GetSchedule() (Response, error) {
 		log.Println("Error executing GET request", err)
 		return Response{}, err
 	}
-	defer res.Body.Close()
 
 	if res.StatusCode != http.StatusOK {
 		log.Printf("request failed with status code: %v, req: %v\n", res.StatusCode, req)
-		return Response{}, fmt.Errorf("request failed with status code: %v", res.StatusCode)
+		return Response{}, fmt.Errorf("request failed with status code: %v, body: %v", res.StatusCode, res.Body)
 	}
+
+	if res.Body == nil {
+		return Response{}, errors.New("no response body")
+	}
+	defer res.Body.Close()
 
 	return NewResponse(res.Body)
 }

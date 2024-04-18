@@ -88,10 +88,31 @@ func TestDomain(t *testing.T) {
 			},
 		}
 
-		leagues, err := domain.Filter(leagues, []string{"Italy: SuperLega", "Latvia: AVL"})
+		leagues, err := domain.FilterScheduled(leagues, []string{"Italy: SuperLega", "Latvia: AVL"})
 		helpers.NoErr(t, err)
 		helpers.DeepEqual(t, leagues, expected)
+	})
 
+	t.Run("filters for finished games", func(t *testing.T) {
+		expected := flashscore.Leagues{
+			{
+				"Italy: SuperLega",
+				flashscore.Events{
+					{
+						HomeName:         "Lube",
+						AwayName:         "Piacenza",
+						StartTime:        1697898600,
+						HomeScoreCurrent: "3",
+						AwayScoreCurrent: "1",
+						Stage:            "FINISHED",
+					},
+				},
+			},
+		}
+
+		leagues, err := domain.FilterFinished(leagues, []string{"Italy: SuperLega", "Latvia: AVL"})
+		helpers.NoErr(t, err)
+		helpers.DeepEqual(t, leagues, expected)
 	})
 
 	t.Run("filters for favourites", func(t *testing.T) {
@@ -113,7 +134,7 @@ func TestDomain(t *testing.T) {
 
 		favourites := []string{"Italy: SuperLega"}
 
-		leagues, err := domain.Filter(leagues, favourites)
+		leagues, err := domain.FilterScheduled(leagues, favourites)
 		helpers.NoErr(t, err)
 		helpers.DeepEqual(t, leagues, expected)
 	})

@@ -12,8 +12,8 @@ var (
 	NoScheduledGamesTodayErr = errors.New("no scheduled games today")
 )
 
-func Filter(leagues flashscore.Leagues, favourites []string) (flashscore.Leagues, error) {
-	scheduled := filterScheduled(leagues)
+func FilterScheduled(leagues flashscore.Leagues, favourites []string) (flashscore.Leagues, error) {
+	scheduled := filter("Scheduled", leagues)
 	if len(scheduled) == 0 {
 		return nil, NoScheduledGamesTodayErr
 	}
@@ -26,12 +26,26 @@ func Filter(leagues flashscore.Leagues, favourites []string) (flashscore.Leagues
 	return filteredFavourites, nil
 }
 
-func filterScheduled(leagues flashscore.Leagues) flashscore.Leagues {
+func FilterFinished(leagues flashscore.Leagues, favourites []string) (flashscore.Leagues, error) {
+	scheduled := filter("Finished", leagues)
+	if len(scheduled) == 0 {
+		return nil, NoScheduledGamesTodayErr
+	}
+
+	filteredFavourites := filterFavourites(scheduled, favourites) //TODO
+	if len(filteredFavourites) == 0 {
+		return nil, NoFavouriteGamesTodayErr
+	}
+
+	return filteredFavourites, nil
+}
+
+func filter(stage string, leagues flashscore.Leagues) flashscore.Leagues {
 	filteredLeagues := flashscore.Leagues{}
 	for _, league := range leagues {
 		scheduledEvents := flashscore.Events{}
 		for _, event := range league.Events {
-			if strings.ToLower(event.Stage) == strings.ToLower("Scheduled") {
+			if sanitized(event.Stage) == sanitized(stage) {
 				scheduledEvents = append(scheduledEvents, event)
 			}
 		}

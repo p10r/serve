@@ -39,8 +39,10 @@ var (
 		"Germany: 1. Bundesliga - Play Offs",
 		"Germany: DVV Cup",
 		"Turkey: Sultanlar Ligi Women",
+		"Turkey: Sultanlar Ligi Women - Play Offs",
 		"Turkey: Efeler Ligi",
-		"Turkey: Efeler Ligi - Playoffs",
+		"TURKEY: Efeler Ligi - Play Offs",
+		"Turkey: Efeler Ligi - 5th-8th places",
 		"Europe: Champions League",
 		"Europe: Champions League Women",
 		"Europe: Champions League Women - Play Offs",
@@ -72,10 +74,10 @@ func workflow() {
 
 	response, err := client.GetSchedule()
 	if err != nil {
-		log.Fatal("Could not fetch schedule")
+		log.Fatal("Could not fetch schedule", err)
 	}
 
-	leagues, err := domain.Filter(response.Leagues, favouriteLeagues)
+	leagues, err := domain.FilterScheduled(response.Leagues, favouriteLeagues)
 	if err != nil {
 		log.Println(err)
 		return
@@ -85,7 +87,7 @@ func workflow() {
 
 	err = discordClient.SendMessage(discord.NewMessage(leagues))
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Error when sending discord message: ", err)
 		return
 	}
 

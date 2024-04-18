@@ -79,10 +79,10 @@ func hour(unixTs int64) string {
 		name     string
 		location *time.Location
 	}{
-		{"BER", time.FixedZone("Europe/Berlin", 1*60*60)},
-		{"NY", time.FixedZone("America/New_York", -5*60*60)},
-		{"LA", time.FixedZone("America/Los_Angeles", -8*60*60)},
-		{"HK", time.FixedZone("Asia/Hong_Kong", 8*60*60)},
+		{"BER", locationOf("Europe/Berlin")},
+		{"NY", locationOf("America/New_York")},
+		{"LA", locationOf("America/Los_Angeles")},
+		{"HK", locationOf("Asia/Hong_Kong")},
 	}
 
 	formattedTimes := make([]string, len(locations))
@@ -99,4 +99,12 @@ func hour(unixTs int64) string {
 	)
 
 	return fmt.Sprintf(formattedString)
+}
+
+func locationOf(locationName string) *time.Location {
+	loc, err := time.LoadLocation(locationName)
+	if err != nil {
+		panic(err) // Handle error appropriately
+	}
+	return loc
 }

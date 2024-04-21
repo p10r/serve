@@ -3,6 +3,7 @@ package discord
 import (
 	"fmt"
 	"github.com/p10r/serve/flashscore"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -71,40 +72,7 @@ func flag(leagueName string) string {
 	return leagueName
 }
 
+// See https://hammertime.cyou/ for more info
 func hour(unixTs int64) string {
-	ts := time.Unix(unixTs, 0)
-	ts.Format("15:14")
-
-	locations := []struct {
-		name     string
-		location *time.Location
-	}{
-		{"BER", locationOf("Europe/Berlin")},
-		{"NY", locationOf("America/New_York")},
-		{"LA", locationOf("America/Los_Angeles")},
-		{"HK", locationOf("Asia/Hong_Kong")},
-	}
-
-	formattedTimes := make([]string, len(locations))
-	for i, loc := range locations {
-		localTime := ts.In(loc.location)
-		formattedTimes[i] = localTime.Format("15:04")
-	}
-
-	formattedString := fmt.Sprintf("(%s %s/%s %s/%s %s/%s %s)",
-		formattedTimes[0], locations[0].name,
-		formattedTimes[1], locations[1].name,
-		formattedTimes[2], locations[2].name,
-		formattedTimes[3], locations[3].name,
-	)
-
-	return fmt.Sprintf(formattedString)
-}
-
-func locationOf(locationName string) *time.Location {
-	loc, err := time.LoadLocation(locationName)
-	if err != nil {
-		panic(err) // Handle error appropriately
-	}
-	return loc
+	return fmt.Sprintf("<t:%s:t>", strconv.FormatInt(unixTs, 10))
 }

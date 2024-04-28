@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/p10r/serve/flashscore"
-	"github.com/p10r/serve/helpers"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -14,10 +13,10 @@ import (
 
 func TestFlashscore(t *testing.T) {
 	t.Run("deserializes flashscore response", func(t *testing.T) {
-		json := helpers.ReadFile(t, "../helpers/flashscore-response.json")
+		json := expect.ReadFile(t, "../helpers/flashscore-response.json")
 
 		response, err := flashscore.NewResponse(io.NopCloser(bytes.NewBufferString(string(json))))
-		helpers.NoErr(t, err)
+		expect.NoErr(t, err)
 
 		fmt.Printf("%v", response)
 		expected := flashscore.Response{
@@ -46,7 +45,7 @@ func TestFlashscore(t *testing.T) {
 			},
 		}
 
-		helpers.True(t, reflect.DeepEqual(response, expected))
+		expect.True(t, reflect.DeepEqual(response, expected))
 	})
 
 	t.Run("returns error if json cannot be read", func(t *testing.T) {
@@ -61,7 +60,7 @@ func TestFlashscore(t *testing.T) {
 		client := flashscore.NewClient(flashscoreServer.URL, apiKey)
 
 		_, err := client.GetSchedule()
-		helpers.NoErr(t, err)
+		expect.NoErr(t, err)
 	})
 
 	t.Run("reports error", func(t *testing.T) {
@@ -73,6 +72,6 @@ func TestFlashscore(t *testing.T) {
 		client := flashscore.NewClient(flashscoreServer.URL, "apiKey")
 
 		_, err := client.GetSchedule()
-		helpers.Err(t, err)
+		expect.Err(t, err)
 	})
 }

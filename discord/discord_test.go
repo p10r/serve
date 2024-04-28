@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"github.com/p10r/serve/discord"
 	"github.com/p10r/serve/flashscore"
-	"github.com/p10r/serve/helpers"
 	"testing"
 )
 
@@ -49,11 +48,11 @@ func TestDiscord(t *testing.T) {
 	t.Run("creates discord message", func(t *testing.T) {
 		msg := discord.NewMessage(leagues)
 		marshal, err := json.MarshalIndent(msg, "", " ")
-		helpers.NoErr(t, err)
+		expect.NoErr(t, err)
 
-		expected := helpers.ReadFile(t, "../helpers/expected-discord-message.json")
+		expected := expect.ReadFile(t, "../helpers/expected-discord-message.json")
 
-		helpers.JsonEqual(t, marshal, expected)
+		expect.JsonEqual(t, marshal, expected)
 	})
 
 	t.Run("sends discord Message", func(t *testing.T) {
@@ -64,6 +63,6 @@ func TestDiscord(t *testing.T) {
 
 		c := discord.NewClient(server.URL)
 		err := c.SendMessage(msg)
-		helpers.NoErr(t, err)
+		expect.NoErr(t, err)
 	})
 }

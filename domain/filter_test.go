@@ -3,7 +3,6 @@ package domain_test
 import (
 	"github.com/p10r/serve/domain"
 	"github.com/p10r/serve/flashscore"
-	"github.com/p10r/serve/helpers"
 	"testing"
 )
 
@@ -89,8 +88,8 @@ func TestDomain(t *testing.T) {
 		}
 
 		leagues, err := domain.FilterScheduled(leagues, []string{"Italy: SuperLega", "Latvia: AVL"})
-		helpers.NoErr(t, err)
-		helpers.DeepEqual(t, leagues, expected)
+		expect.NoErr(t, err)
+		expect.DeepEqual(t, leagues, expected)
 	})
 
 	t.Run("filters for finished matches", func(t *testing.T) {
@@ -111,8 +110,8 @@ func TestDomain(t *testing.T) {
 		}
 
 		leagues, err := domain.FilterFinished(leagues, []string{"Italy: SuperLega", "Latvia: AVL"})
-		helpers.NoErr(t, err)
-		helpers.DeepEqual(t, leagues, expected)
+		expect.NoErr(t, err)
+		expect.DeepEqual(t, leagues, expected)
 	})
 
 	t.Run("filters for favourites", func(t *testing.T) {
@@ -135,7 +134,7 @@ func TestDomain(t *testing.T) {
 		favourites := []string{"Italy: SuperLega"}
 
 		leagues, err := domain.FilterScheduled(leagues, favourites)
-		helpers.NoErr(t, err)
-		helpers.DeepEqual(t, leagues, expected)
+		expect.NoErr(t, err)
+		expect.DeepEqual(t, leagues, expected)
 	})
 }

@@ -1,7 +1,7 @@
 package flashscore
 
 import (
-	"github.com/p10r/serve/helpers"
+	"github.com/p10r/serve/expect"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -22,7 +22,7 @@ func NewFakeServer(t *testing.T, apiKey string) *httptest.Server {
 			return
 		}
 
-		json := helpers.ReadFile(t, "../helpers/flashscore-response.json")
+		json := expect.ReadFile(t, "../helpers/flashscore-response.json")
 		w.Write([]byte(json))
 	}))
 }

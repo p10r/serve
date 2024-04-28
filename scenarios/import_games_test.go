@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/p10r/serve/db"
 	"github.com/p10r/serve/domain"
-	"github.com/p10r/serve/helpers"
+	"github.com/p10r/serve/expect"
 	"testing"
 )
 
@@ -40,10 +40,10 @@ func TestImportMatches(t *testing.T) {
 		matchStore := db.NewMatchStore(MustOpenDB(t))
 
 		_, err := matchStore.Add(ctx, untrackedMatch)
-		helpers.NoErr(t, err)
+		expect.NoErr(t, err)
 
 		matches, err := matchStore.All(ctx)
-		helpers.NoErr(t, err) //TODO rename helpers to expect
+		expect.NoErr(t, err)
 
 		expected := domain.Match{
 			ID:        1,
@@ -53,8 +53,8 @@ func TestImportMatches(t *testing.T) {
 			Country:   "Germany",
 			League:    "Bundesliga Playoffs",
 		}
-		helpers.Equal(t, matches[0], expected)
+		expect.Equal(t, matches[0], expected)
 	})
 
-	//test what happens if two matches with the same timestamp are in db
+	//TODO test what happens if two matches with the same timestamp are in db
 }

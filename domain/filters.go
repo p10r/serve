@@ -8,8 +8,8 @@ import (
 )
 
 var (
-	NoFavouriteGamesTodayErr = errors.New("no favourite games today")
-	NoScheduledGamesTodayErr = errors.New("no scheduled games today")
+	NoFavouriteGamesTodayErr = errors.New("no favourite matches today")
+	NoScheduledGamesTodayErr = errors.New("no scheduled matches today")
 )
 
 func FilterScheduled(leagues flashscore.Leagues, favourites []string) (flashscore.Leagues, error) {

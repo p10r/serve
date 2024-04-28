@@ -58,7 +58,7 @@ func TestDomain(t *testing.T) {
 		},
 	}
 
-	t.Run("filters for scheduled games", func(t *testing.T) {
+	t.Run("filters for scheduled matches", func(t *testing.T) {
 		expected := flashscore.Leagues{
 			{
 				"Italy: SuperLega",
@@ -93,7 +93,7 @@ func TestDomain(t *testing.T) {
 		helpers.DeepEqual(t, leagues, expected)
 	})
 
-	t.Run("filters for finished games", func(t *testing.T) {
+	t.Run("filters for finished matches", func(t *testing.T) {
 		expected := flashscore.Leagues{
 			{
 				"Italy: SuperLega",

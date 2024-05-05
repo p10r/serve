@@ -32,7 +32,7 @@ func NewClient(baseUri, apiKey string) *Client {
 	return &Client{c, baseUri, apiKey}
 }
 
-func (c Client) GetSchedule() (Response, error) {
+func (c Client) GetUpcomingMatches() (Response, error) {
 	url := c.baseUri + "/v1/events/list?locale=en_GB&timezone=-4&sport_id=12&indent_days=0"
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {

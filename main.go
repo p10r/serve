@@ -72,7 +72,7 @@ func workflow() {
 
 	client := flashscore.NewClient(flashscoreUri, apiKey)
 
-	response, err := client.GetSchedule()
+	response, err := client.GetUpcomingMatches()
 	if err != nil {
 		log.Fatal("Could not fetch schedule", err)
 	}

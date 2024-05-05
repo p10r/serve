@@ -3,6 +3,7 @@ package flashscore_test
 import (
 	"bytes"
 	"fmt"
+	"github.com/p10r/serve/expect"
 	"github.com/p10r/serve/flashscore"
 	"io"
 	"net/http"
@@ -59,7 +60,7 @@ func TestFlashscore(t *testing.T) {
 
 		client := flashscore.NewClient(flashscoreServer.URL, apiKey)
 
-		_, err := client.GetSchedule()
+		_, err := client.GetUpcomingMatches()
 		expect.NoErr(t, err)
 	})
 
@@ -71,7 +72,7 @@ func TestFlashscore(t *testing.T) {
 
 		client := flashscore.NewClient(flashscoreServer.URL, "apiKey")
 
-		_, err := client.GetSchedule()
+		_, err := client.GetUpcomingMatches()
 		expect.Err(t, err)
 	})
 }

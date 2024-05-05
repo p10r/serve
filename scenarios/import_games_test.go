@@ -27,8 +27,6 @@ func TestImportMatches(t *testing.T) {
 	ctx := context.TODO()
 
 	t.Run("imports today's matches to db", func(t *testing.T) {
-		//MatchImporter{}.importMatches()
-
 		untrackedMatch := domain.UntrackedMatch{
 			HomeName:  "Berlin",
 			AwayName:  "Düren",
@@ -38,8 +36,9 @@ func TestImportMatches(t *testing.T) {
 		}
 
 		matchStore := db.NewMatchStore(MustOpenDB(t))
+		importer := domain.NewMatchImporter(matchStore)
 
-		_, err := matchStore.Add(ctx, untrackedMatch)
+		_, err := importer.ImportMatches(ctx, untrackedMatch)
 		expect.NoErr(t, err)
 
 		matches, err := matchStore.All(ctx)

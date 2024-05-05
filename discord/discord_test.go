@@ -3,6 +3,7 @@ package discord_test
 import (
 	"encoding/json"
 	"github.com/p10r/serve/discord"
+	"github.com/p10r/serve/expect"
 	"github.com/p10r/serve/flashscore"
 	"testing"
 )
@@ -50,7 +51,7 @@ func TestDiscord(t *testing.T) {
 		marshal, err := json.MarshalIndent(msg, "", " ")
 		expect.NoErr(t, err)
 
-		expected := expect.ReadFile(t, "../helpers/expected-discord-message.json")
+		expected := expect.ReadFile(t, "../fixtures/expected-discord-message.json")
 
 		expect.JsonEqual(t, marshal, expected)
 	})

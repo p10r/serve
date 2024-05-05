@@ -14,7 +14,7 @@ import (
 
 func TestFlashscore(t *testing.T) {
 	t.Run("deserializes flashscore response", func(t *testing.T) {
-		json := expect.ReadFile(t, "../helpers/flashscore-response.json")
+		json := expect.ReadFile(t, "../fixtures/flashscore-response.json")
 
 		response, err := flashscore.NewResponse(io.NopCloser(bytes.NewBufferString(string(json))))
 		expect.NoErr(t, err)

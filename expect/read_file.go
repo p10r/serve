@@ -6,6 +6,7 @@ import (
 	"testing"
 )
 
+// TODO move to scenarios
 func ReadFile(t *testing.T, filePath string) []byte {
 	t.Helper()
 

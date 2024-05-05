@@ -22,7 +22,7 @@ func NewFakeServer(t *testing.T, apiKey string) *httptest.Server {
 			return
 		}
 
-		json := expect.ReadFile(t, "../helpers/flashscore-response.json")
+		json := expect.ReadFile(t, "../fixtures/flashscore-response.json")
 		w.Write([]byte(json))
 	}))
 }

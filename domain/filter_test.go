@@ -2,6 +2,7 @@ package domain_test
 
 import (
 	"github.com/p10r/serve/domain"
+	"github.com/p10r/serve/expect"
 	"github.com/p10r/serve/flashscore"
 	"testing"
 )

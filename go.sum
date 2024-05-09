@@ -1,2 +1,4 @@
+github.com/approvals/go-approval-tests v0.0.0-20240417152556-434b9105e958 h1:7/wXpCITDdUf5qOuxr8e9YwFEJIPkZZyD0Z3nvV1Zwc=
+github.com/approvals/go-approval-tests v0.0.0-20240417152556-434b9105e958/go.mod h1:PJOqSY8IofNv3heAD6k8E7EfFS6okiSS9bSAasaAUME=
 github.com/mattn/go-sqlite3 v1.14.22 h1:2gZY6PC6kBnID23Tichd1K+Z0oS6nE/XwU+Vz/5o4kU=
 github.com/mattn/go-sqlite3 v1.14.22/go.mod h1:Uh1q+B4BYcTPb+yiD3kU8Ct7aC0hY9fxUwlHK0RXw+Y=

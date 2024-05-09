@@ -7,6 +7,7 @@ The outcome looks as such:
 ![img.png](img.png)
 
 ## Deployment
+
 ```bash
 brew install flyctl
 
@@ -25,3 +26,8 @@ fly scale count 1
 # update running app
 fly deploy
 ```
+
+## Testing
+
+There's a skipped test in `discord/discord_test.go` if you want to check that the discord message gets properly.
+formatted

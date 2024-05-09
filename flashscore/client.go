@@ -3,6 +3,7 @@ package flashscore
 import (
 	"errors"
 	"fmt"
+	"github.com/p10r/serve/domain"
 	"log"
 	"net"
 	"net/http"
@@ -32,12 +33,12 @@ func NewClient(baseUri, apiKey string) *Client {
 	return &Client{c, baseUri, apiKey}
 }
 
-func (c Client) GetUpcomingMatches() (Response, error) {
+func (c Client) GetUpcomingMatches() (domain.UntrackedMatches, error) {
 	url := c.baseUri + "/v1/events/list?locale=en_GB&timezone=-4&sport_id=12&indent_days=0"
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		log.Println("Error creating request:", err)
-		return Response{}, err
+		return domain.UntrackedMatches{}, err
 	}
 	req.Header.Add("Content-Type", "application/json")
 	req.Header.Add("X-RapidAPI-Host", "flashscore.p.rapidapi.com")
@@ -46,22 +47,27 @@ func (c Client) GetUpcomingMatches() (Response, error) {
 	res, err := c.http.Do(req)
 	if res.StatusCode == http.StatusForbidden {
 		log.Println("Forbidden - wrong API key?")
-		return Response{}, err
+		return domain.UntrackedMatches{}, err
 	}
 	if err != nil {
 		log.Println("Error executing GET request", err)
-		return Response{}, err
+		return domain.UntrackedMatches{}, err
 	}
 
 	if res.StatusCode != http.StatusOK {
 		log.Printf("request failed with status code: %v, req: %v\n", res.StatusCode, req)
-		return Response{}, fmt.Errorf("request failed with status code: %v, body: %v", res.StatusCode, res.Body)
+		return domain.UntrackedMatches{}, fmt.Errorf("request failed with status code: %v, body: %v", res.StatusCode, res.Body)
 	}
 
 	if res.Body == nil {
-		return Response{}, errors.New("no response body")
+		return domain.UntrackedMatches{}, errors.New("no response body")
 	}
 	defer res.Body.Close()
 
-	return NewResponse(res.Body)
+	response, err := NewResponse(res.Body)
+	if res.Body == nil {
+		return domain.UntrackedMatches{}, errors.New("could not parse JSON")
+	}
+
+	return response.ToUntrackedMatches(), err
 }

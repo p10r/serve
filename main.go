@@ -85,7 +85,7 @@ func workflow() {
 
 	discordClient := discord.NewClient(discordUri)
 
-	err = discordClient.SendMessage(discord.NewMessage(leagues))
+	err = discordClient.SendMessage(discord.NewMessage(leagues, time.Now()))
 	if err != nil {
 		log.Fatal("Error when sending discord message: ", err)
 		return

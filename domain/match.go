@@ -1,12 +1,16 @@
 package domain
 
 type UntrackedMatch struct {
-	HomeName  string
-	AwayName  string
-	StartTime int64
-	Country   string
-	League    string
+	HomeName       string
+	AwayName       string
+	StartTime      int64
+	FlashscoreName string // Country + League
+	Country        string
+	League         string
+	Stage          string //Scheduled, Finished TODO enum
 }
+
+type UntrackedMatches []UntrackedMatch
 
 type Match struct {
 	ID        int64

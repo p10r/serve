@@ -3,139 +3,118 @@ package domain_test
 import (
 	"github.com/p10r/serve/domain"
 	"github.com/p10r/serve/expect"
-	"github.com/p10r/serve/flashscore"
 	"testing"
 )
 
 func TestDomain(t *testing.T) {
-	leagues := flashscore.Leagues{
+	//TODO move to one JSON file
+	upcomingMatches := domain.UntrackedMatches{
 		{
-			"Austria: AVL",
-			flashscore.Events{
-				{
-					HomeName:         "Sokol Wien",
-					AwayName:         "VBK Klagenfurt",
-					StartTime:        1697898600,
-					HomeScoreCurrent: "3",
-					AwayScoreCurrent: "1",
-					Stage:            "FINISHED",
-				},
-			},
+			HomeName:       "Sokol Wien",
+			AwayName:       "VBK Klagenfurt",
+			StartTime:      1697898600,
+			FlashscoreName: "Austria: AVL",
+			Country:        "Austria",
+			League:         "AVL",
+			Stage:          "FINISHED",
 		},
 		{
-			"Italy: SuperLega",
-			flashscore.Events{
-				{
-					HomeName:         "Lube",
-					AwayName:         "Piacenza",
-					StartTime:        1697898600,
-					HomeScoreCurrent: "3",
-					AwayScoreCurrent: "1",
-					Stage:            "FINISHED",
-				},
-				{
-					HomeName:         "Perugia",
-					AwayName:         "Modena",
-					StartTime:        1697965200,
-					HomeScoreCurrent: "",
-					AwayScoreCurrent: "",
-					Stage:            "SCHEDULED",
-				},
-			},
+			HomeName:       "Lube",
+			AwayName:       "Piacenza",
+			StartTime:      1697898600,
+			FlashscoreName: "Italy: SuperLega",
+			Country:        "Italy",
+			League:         "SuperLega",
+			Stage:          "FINISHED",
 		},
 		{
-			"Latvia: AVL",
-			flashscore.Events{
-				{
-					HomeName:         "Riga",
-					AwayName:         "Jelgava",
-					StartTime:        1697898600,
-					HomeScoreCurrent: "3",
-					AwayScoreCurrent: "1",
-					Stage:            "SCHEDULED",
-				},
-			},
+			HomeName:       "Perugia",
+			AwayName:       "Modena",
+			StartTime:      1697965200,
+			FlashscoreName: "Italy: SuperLega",
+			Country:        "Italy",
+			League:         "SuperLega",
+			Stage:          "SCHEDULED",
+		},
+		{
+			HomeName:       "Riga",
+			AwayName:       "Jelgava",
+			StartTime:      1697898600,
+			FlashscoreName: "Latvia: AVL",
+			Country:        "Latvia",
+			League:         "AVL",
+			Stage:          "SCHEDULED",
 		},
 	}
 
 	t.Run("filters for scheduled matches", func(t *testing.T) {
-		expected := flashscore.Leagues{
+		expected := domain.UntrackedMatches{
 			{
-				"Italy: SuperLega",
-				flashscore.Events{
-					{
-						HomeName:         "Perugia",
-						AwayName:         "Modena",
-						StartTime:        1697965200,
-						HomeScoreCurrent: "",
-						AwayScoreCurrent: "",
-						Stage:            "SCHEDULED",
-					},
-				},
+				HomeName:       "Perugia",
+				AwayName:       "Modena",
+				StartTime:      1697965200,
+				FlashscoreName: "Italy: SuperLega",
+				Country:        "Italy",
+				League:         "SuperLega",
+				Stage:          "SCHEDULED",
 			},
 			{
-				"Latvia: AVL",
-				flashscore.Events{
-					{
-						HomeName:         "Riga",
-						AwayName:         "Jelgava",
-						StartTime:        1697898600,
-						HomeScoreCurrent: "3",
-						AwayScoreCurrent: "1",
-						Stage:            "SCHEDULED",
-					},
-				},
+				HomeName:       "Riga",
+				AwayName:       "Jelgava",
+				StartTime:      1697898600,
+				FlashscoreName: "Latvia: AVL",
+				Country:        "Latvia",
+				League:         "AVL",
+				Stage:          "SCHEDULED",
 			},
 		}
 
-		leagues, err := domain.FilterScheduled(leagues, []string{"Italy: SuperLega", "Latvia: AVL"})
+		matches, err := upcomingMatches.FilterScheduled([]string{"Italy: SuperLega", "Latvia: AVL"})
 		expect.NoErr(t, err)
-		expect.DeepEqual(t, leagues, expected)
+		expect.DeepEqual(t, matches, expected)
 	})
 
 	t.Run("filters for finished matches", func(t *testing.T) {
-		expected := flashscore.Leagues{
+		expected := domain.UntrackedMatches{
 			{
-				"Italy: SuperLega",
-				flashscore.Events{
-					{
-						HomeName:         "Lube",
-						AwayName:         "Piacenza",
-						StartTime:        1697898600,
-						HomeScoreCurrent: "3",
-						AwayScoreCurrent: "1",
-						Stage:            "FINISHED",
-					},
-				},
+				HomeName:       "Lube",
+				AwayName:       "Piacenza",
+				StartTime:      1697898600,
+				FlashscoreName: "Italy: SuperLega",
+				Country:        "Italy",
+				League:         "SuperLega",
+				Stage:          "FINISHED",
 			},
 		}
 
-		leagues, err := domain.FilterFinished(leagues, []string{"Italy: SuperLega", "Latvia: AVL"})
+		matches, err := upcomingMatches.FilterFinished([]string{"Italy: SuperLega", "Latvia: AVL"})
 		expect.NoErr(t, err)
-		expect.DeepEqual(t, leagues, expected)
+		expect.DeepEqual(t, matches, expected)
+	})
+
+	t.Run("handles 0 scheduled matches", func(t *testing.T) {
+		_, err := domain.UntrackedMatches{}.FilterScheduled([]string{"Italy: SuperLega"})
+		expect.Err(t, err)
+		expect.DeepEqual(t, err, domain.NoScheduledGamesTodayErr)
 	})
 
 	t.Run("filters for favourites", func(t *testing.T) {
-		expected := flashscore.Leagues{
-			{
-				"Italy: SuperLega",
-				flashscore.Events{
-					{
-						HomeName:         "Perugia",
-						AwayName:         "Modena",
-						StartTime:        1697965200,
-						HomeScoreCurrent: "",
-						AwayScoreCurrent: "",
-						Stage:            "SCHEDULED",
-					},
-				},
+		expected := domain.UntrackedMatches{
+			domain.UntrackedMatch{
+				HomeName:       "Perugia",
+				AwayName:       "Modena",
+				StartTime:      1697965200,
+				FlashscoreName: "Italy: SuperLega",
+				Country:        "Italy",
+				League:         "SuperLega",
+				Stage:          "SCHEDULED",
 			},
 		}
 
 		favourites := []string{"Italy: SuperLega"}
 
-		leagues, err := domain.FilterScheduled(leagues, favourites)
+		matches, err := upcomingMatches.FilterScheduled(favourites)
 		expect.NoErr(t, err)
-		expect.DeepEqual(t, leagues, expected)
+		expect.DeepEqual(t, matches, expected)
 	})
 }

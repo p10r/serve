@@ -2,10 +2,10 @@ package main
 
 import (
 	"github.com/p10r/serve/discord"
-	"github.com/p10r/serve/domain"
 	"github.com/p10r/serve/flashscore"
 	"log"
 	"os"
+	"time"
 )
 
 var (
@@ -77,7 +77,7 @@ func workflow() {
 		log.Fatal("Could not fetch schedule", err)
 	}
 
-	leagues, err := domain.FilterScheduled(response.Leagues, favouriteLeagues)
+	leagues, err := response.FilterScheduled(favouriteLeagues)
 	if err != nil {
 		log.Println(err)
 		return

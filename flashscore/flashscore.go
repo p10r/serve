@@ -2,7 +2,9 @@ package flashscore
 
 import (
 	json2 "encoding/json"
+	"github.com/p10r/serve/domain"
 	"io"
+	"strings"
 )
 
 type Response struct {
@@ -18,6 +20,32 @@ func NewResponse(input io.ReadCloser) (Response, error) {
 	}
 
 	return res, nil
+}
+
+func (r Response) ToUntrackedMatches() domain.UntrackedMatches {
+	matches := domain.UntrackedMatches{}
+
+	for _, league := range r.Leagues {
+		leagueInfo := strings.Split(league.Name, ": ")
+		country := leagueInfo[0]
+		leagueName := leagueInfo[1]
+
+		for _, event := range league.Events {
+			match := domain.UntrackedMatch{
+				HomeName:       event.HomeName,
+				AwayName:       event.AwayName,
+				StartTime:      event.StartTime,
+				FlashscoreName: league.Name,
+				Country:        country,
+				League:         leagueName,
+				Stage:          event.Stage,
+			}
+
+			matches = append(matches, match)
+		}
+	}
+
+	return matches
 }
 
 type Leagues []League

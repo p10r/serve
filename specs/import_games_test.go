@@ -1,27 +1,13 @@
-package scenarios_test
+package specifications_test
 
 import (
 	"context"
 	"github.com/p10r/serve/db"
 	"github.com/p10r/serve/domain"
 	"github.com/p10r/serve/expect"
+	"github.com/p10r/serve/testutil"
 	"testing"
 )
-
-// MustOpenDB returns a new, open DB. Fatal on error.
-func MustOpenDB(tb testing.TB) *db.DB {
-	tb.Helper()
-
-	// Write to an in-memory database by default.
-	// If the -dump flag is set, generate a temp file for the database.
-	dsn := ":memory:"
-
-	instance := db.NewDB(dsn)
-	if err := instance.Open(); err != nil {
-		tb.Fatal(err)
-	}
-	return instance
-}
 
 func TestImportMatches(t *testing.T) {
 	ctx := context.TODO()
@@ -35,7 +21,7 @@ func TestImportMatches(t *testing.T) {
 			League:    "Bundesliga Playoffs",
 		}
 
-		matchStore := db.NewMatchStore(MustOpenDB(t))
+		matchStore := db.NewMatchStore(testutil.MustOpenDB(t))
 		importer := domain.NewMatchImporter(matchStore)
 
 		_, err := importer.ImportMatches(ctx, untrackedMatch)

@@ -5,9 +5,10 @@ import (
 	approvals "github.com/approvals/go-approval-tests"
 	"github.com/approvals/go-approval-tests/reporters"
 	"github.com/p10r/serve/discord"
-	"github.com/p10r/serve/domain"
 	"github.com/p10r/serve/expect"
+	"github.com/p10r/serve/testutil"
 	"os"
+	"sort"
 	"testing"
 	"time"
 )
@@ -21,39 +22,15 @@ func TestMain(m *testing.M) {
 }
 
 func TestDiscord(t *testing.T) {
-	leagues := domain.UntrackedMatches{
-		{
-			HomeName:       "BR Volleys",
-			AwayName:       "VfB Friedrichshafen",
-			StartTime:      0,
-			FlashscoreName: "Germany: 1. Bundesliga",
-			Country:        "Germany",
-			League:         "1. Bundesliga",
-			Stage:          "FINISHED",
-		},
-		{
-			HomeName:       "Lube",
-			AwayName:       "Piacenza",
-			StartTime:      1697898600,
-			FlashscoreName: "Italy: SuperLega",
-			Country:        "Italy",
-			League:         "SuperLega",
-			Stage:          "FINISHED",
-		},
-		{
-			HomeName:       "Perugia",
-			AwayName:       "Modena",
-			StartTime:      1697965200,
-			FlashscoreName: "Italy: SuperLega",
-			Country:        "Italy",
-			League:         "SuperLega",
-			Stage:          "FINISHED",
-		},
-	}
+	leagues := testutil.UntrackedMatches(t)
 	may28th := time.Date(2024, 5, 28, 0, 0, 0, 0, time.UTC)
 
 	t.Run("creates discord message", func(t *testing.T) {
-		msg := discord.NewMessage(leagues, may28th)
+		initial := discord.NewMessage(leagues, may28th)
+
+		// we order the leagues, otherwise it might differ each test run
+		msg := orderLeagues(initial)
+
 		marshal, err := json.MarshalIndent(msg, "", " ")
 		expect.NoErr(t, err)
 
@@ -84,4 +61,15 @@ func TestDiscord(t *testing.T) {
 		err := c.SendMessage(msg)
 		expect.NoErr(t, err)
 	})
+}
+
+func orderLeagues(msg discord.Message) discord.Message {
+	sort.Slice(msg.Embeds[0].Fields, func(i, j int) bool {
+		leagueName1 := msg.Embeds[0].Fields[i].Name
+		leagueName2 := msg.Embeds[0].Fields[j].Name
+
+		return len(leagueName1) < len(leagueName2)
+	})
+
+	return msg
 }

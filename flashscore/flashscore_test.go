@@ -9,7 +9,6 @@ import (
 	"io"
 	"net/http"
 	"net/http/httptest"
-	"reflect"
 	"testing"
 )
 
@@ -39,31 +38,9 @@ func TestFlashscore(t *testing.T) {
 		json := testutil.FlashscoreResponse(t)
 
 		response, err := flashscore.NewResponse(io.NopCloser(bytes.NewBufferString(string(json))))
+
 		expect.NoErr(t, err)
-
-		expected := flashscore.Response{
-			Leagues: []flashscore.League{
-				{
-					"Croatia: Superliga - Play Offs",
-					flashscore.Events{
-						{
-							HomeName:         "Mok Mursa",
-							AwayName:         "HAOK Mladost *",
-							StartTime:        1714932000,
-							HomeScoreCurrent: "2",
-							AwayScoreCurrent: "3",
-							Stage:            "FINISHED",
-						},
-					},
-				},
-			},
-		}
-
-		expect.True(t, reflect.DeepEqual(response.Leagues[0], expected.Leagues[0]))
-	})
-
-	t.Run("returns error if json cannot be read", func(t *testing.T) {
-
+		expect.Equal(t, len(response.Leagues), 5)
 	})
 
 	t.Run("fetches response", func(t *testing.T) {

@@ -31,3 +31,7 @@ fly deploy
 
 There's a skipped test in `discord/discord_test.go` if you want to check that the discord message gets properly.
 formatted
+
+## TODOs
+
+- use `"NAME_PART_1"` & `"NAME_PART_2"` from flashscore response for country/league struct

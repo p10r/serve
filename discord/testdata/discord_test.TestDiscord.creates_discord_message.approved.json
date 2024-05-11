@@ -5,23 +5,28 @@
       "fields": [
         {
           "inline": false,
-          "name": "USA",
+          "name": "🇺🇸USA: PVF Women",
           "value": "**Grand Rapids Rise W - San Diego Mojo W**\t \u003ct:1714939200:t\u003e"
         },
         {
           "inline": false,
-          "name": "Croatia",
-          "value": "**Mok Mursa - HAOK Mladost**\t \u003ct:1714932000:t\u003e"
-        },
-        {
-          "inline": false,
-          "name": "🇮🇹 Italy",
+          "name": "🇮🇹Italy: Coppa Italia",
           "value": "**Grottazzolina - Cantu**\t \u003ct:1714924800:t\u003e\n**Cuneo Volley - Porto Viro**\t \u003ct:1714928400:t\u003e\n**Ravenna - Pordenone**\t \u003ct:1714928400:t\u003e\n**Siena - Brescia**\t \u003ct:1714928400:t\u003e"
         },
         {
           "inline": false,
-          "name": "🇪🇺 Europe",
-          "value": "**Trentino - Jastrzebski**\t \u003ct:1714917600:t\u003e\n**Conegliano W - Vero Volley W**\t \u003ct:1714928400:t\u003e"
+          "name": "Croatia: Superliga - Play Offs",
+          "value": "**Mok Mursa - HAOK Mladost**\t \u003ct:1714932000:t\u003e"
+        },
+        {
+          "inline": false,
+          "name": "🇪🇺Europe: Champions League - Play Offs",
+          "value": "**Trentino - Jastrzebski**\t \u003ct:1714917600:t\u003e\n**Resovia - Zaksa**\t \u003ct:1714917600:t\u003e"
+        },
+        {
+          "inline": false,
+          "name": "🇪🇺Europe: Champions League Women - Play Offs",
+          "value": "**Conegliano W - Vero Volley W**\t \u003ct:1714928400:t\u003e"
         }
       ]
     }

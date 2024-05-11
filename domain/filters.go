@@ -62,7 +62,6 @@ func filterFavourites(matches UntrackedMatches, favourites []string) UntrackedMa
 
 	filtered := UntrackedMatches{}
 	for _, match := range matches {
-		fmt.Printf("debug: %v\n", lowerCase(match.FlashscoreName))
 		if slices.Contains(favs, lowerCase(match.FlashscoreName)) {
 			filtered = append(filtered, match)
 		}

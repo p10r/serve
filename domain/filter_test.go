@@ -3,73 +3,35 @@ package domain_test
 import (
 	"github.com/p10r/serve/domain"
 	"github.com/p10r/serve/expect"
+	"github.com/p10r/serve/testutil"
 	"testing"
 )
 
 func TestDomain(t *testing.T) {
-	//TODO move to one JSON file
-	upcomingMatches := domain.UntrackedMatches{
-		{
-			HomeName:       "Sokol Wien",
-			AwayName:       "VBK Klagenfurt",
-			StartTime:      1697898600,
-			FlashscoreName: "Austria: AVL",
-			Country:        "Austria",
-			League:         "AVL",
-			Stage:          "FINISHED",
-		},
-		{
-			HomeName:       "Lube",
-			AwayName:       "Piacenza",
-			StartTime:      1697898600,
-			FlashscoreName: "Italy: SuperLega",
-			Country:        "Italy",
-			League:         "SuperLega",
-			Stage:          "FINISHED",
-		},
-		{
-			HomeName:       "Perugia",
-			AwayName:       "Modena",
-			StartTime:      1697965200,
-			FlashscoreName: "Italy: SuperLega",
-			Country:        "Italy",
-			League:         "SuperLega",
-			Stage:          "SCHEDULED",
-		},
-		{
-			HomeName:       "Riga",
-			AwayName:       "Jelgava",
-			StartTime:      1697898600,
-			FlashscoreName: "Latvia: AVL",
-			Country:        "Latvia",
-			League:         "AVL",
-			Stage:          "SCHEDULED",
-		},
-	}
-
 	t.Run("filters for scheduled matches", func(t *testing.T) {
 		expected := domain.UntrackedMatches{
 			{
-				HomeName:       "Perugia",
-				AwayName:       "Modena",
-				StartTime:      1697965200,
-				FlashscoreName: "Italy: SuperLega",
-				Country:        "Italy",
-				League:         "SuperLega",
+				HomeName:       "Trentino",
+				AwayName:       "Jastrzebski",
+				StartTime:      1714917600,
+				FlashscoreName: "Europe: Champions League - Play Offs",
+				Country:        "Europe",
+				League:         "Champions League - Play Offs",
 				Stage:          "SCHEDULED",
 			},
 			{
-				HomeName:       "Riga",
-				AwayName:       "Jelgava",
-				StartTime:      1697898600,
-				FlashscoreName: "Latvia: AVL",
-				Country:        "Latvia",
-				League:         "AVL",
+				HomeName:       "Resovia",
+				AwayName:       "Zaksa",
+				StartTime:      1714917600,
+				FlashscoreName: "Europe: Champions League - Play Offs",
+				Country:        "Europe",
+				League:         "Champions League - Play Offs",
 				Stage:          "SCHEDULED",
 			},
 		}
 
-		matches, err := upcomingMatches.FilterScheduled([]string{"Italy: SuperLega", "Latvia: AVL"})
+		untrackedMatches := testutil.UntrackedMatches(t)
+		matches, err := untrackedMatches.FilterScheduled([]string{"Europe: Champions League - Play Offs"})
 		expect.NoErr(t, err)
 		expect.DeepEqual(t, matches, expected)
 	})
@@ -77,17 +39,18 @@ func TestDomain(t *testing.T) {
 	t.Run("filters for finished matches", func(t *testing.T) {
 		expected := domain.UntrackedMatches{
 			{
-				HomeName:       "Lube",
-				AwayName:       "Piacenza",
-				StartTime:      1697898600,
-				FlashscoreName: "Italy: SuperLega",
-				Country:        "Italy",
-				League:         "SuperLega",
+				HomeName:       "Mok Mursa",
+				AwayName:       "HAOK Mladost",
+				StartTime:      1714932000,
+				FlashscoreName: "Croatia: Superliga - Play Offs",
+				Country:        "Croatia",
+				League:         "Superliga - Play Offs",
 				Stage:          "FINISHED",
 			},
 		}
 
-		matches, err := upcomingMatches.FilterFinished([]string{"Italy: SuperLega", "Latvia: AVL"})
+		untrackedMatches := testutil.UntrackedMatches(t)
+		matches, err := untrackedMatches.FilterFinished([]string{"Croatia: Superliga - Play Offs"})
 		expect.NoErr(t, err)
 		expect.DeepEqual(t, matches, expected)
 	})
@@ -100,20 +63,39 @@ func TestDomain(t *testing.T) {
 
 	t.Run("filters for favourites", func(t *testing.T) {
 		expected := domain.UntrackedMatches{
-			domain.UntrackedMatch{
-				HomeName:       "Perugia",
-				AwayName:       "Modena",
-				StartTime:      1697965200,
-				FlashscoreName: "Italy: SuperLega",
-				Country:        "Italy",
-				League:         "SuperLega",
+			{
+				HomeName:       "Trentino",
+				AwayName:       "Jastrzebski",
+				StartTime:      1714917600,
+				FlashscoreName: "Europe: Champions League - Play Offs",
+				Country:        "Europe",
+				League:         "Champions League - Play Offs",
+				Stage:          "SCHEDULED",
+			},
+			{
+				HomeName:       "Resovia",
+				AwayName:       "Zaksa",
+				StartTime:      1714917600,
+				FlashscoreName: "Europe: Champions League - Play Offs",
+				Country:        "Europe",
+				League:         "Champions League - Play Offs",
+				Stage:          "SCHEDULED",
+			},
+			{
+				HomeName:       "Grand Rapids Rise W",
+				AwayName:       "San Diego Mojo W",
+				StartTime:      1714939200,
+				FlashscoreName: "USA: PVF Women",
+				Country:        "USA",
+				League:         "PVF Women",
 				Stage:          "SCHEDULED",
 			},
 		}
 
-		favourites := []string{"Italy: SuperLega"}
+		favourites := []string{"Europe: Champions League - Play Offs", "USA: PVF Women"}
 
-		matches, err := upcomingMatches.FilterScheduled(favourites)
+		matches, err := testutil.UntrackedMatches(t).FilterScheduled(favourites)
+
 		expect.NoErr(t, err)
 		expect.DeepEqual(t, matches, expected)
 	})

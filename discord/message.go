@@ -24,14 +24,12 @@ type Fields struct {
 }
 
 func NewMessage(matches domain.UntrackedMatches, currentTime time.Time) Message {
-	countries := sortByLeague(matches)
-
 	date := currentTime.Format("Monday, 2 January 2006")
 
 	var fields []Fields
-	for country, matchesForCountry := range countries {
+	for league, matchesForCountry := range sortByLeague(matches) {
 		fields = append(fields, Fields{
-			Name:   flag(country),
+			Name:   flag(league) + matchesForCountry[0].FlashscoreName,
 			Value:  text(matchesForCountry),
 			Inline: false,
 		})
@@ -43,7 +41,7 @@ func NewMessage(matches domain.UntrackedMatches, currentTime time.Time) Message 
 func sortByLeague(matches domain.UntrackedMatches) map[string]domain.UntrackedMatches {
 	countries := make(map[string]domain.UntrackedMatches)
 	for _, match := range matches {
-		countries[match.Country] = append(countries[match.Country], match)
+		countries[match.FlashscoreName] = append(countries[match.FlashscoreName], match)
 	}
 	return countries
 }
@@ -58,27 +56,30 @@ func text(matches domain.UntrackedMatches) string {
 
 func flag(leagueName string) string {
 	if strings.Contains(leagueName, "Poland") {
-		return "🇵🇱 " + leagueName
+		return "🇵🇱"
 	}
 	if strings.Contains(leagueName, "Italy") {
-		return "🇮🇹 " + leagueName
+		return "🇮🇹"
 	}
 	if strings.Contains(leagueName, "France") {
-		return "🇫🇷 " + leagueName
+		return "🇫🇷"
 	}
 	if strings.Contains(leagueName, "Germany") {
-		return "🇩🇪 " + leagueName
+		return "🇩🇪"
 	}
 	if strings.Contains(leagueName, "Russia") {
-		return "🇷🇺 " + leagueName
+		return "🇷🇺"
 	}
 	if strings.Contains(leagueName, "Turkey") {
-		return "🇹🇷 " + leagueName
+		return "🇹🇷"
 	}
 	if strings.Contains(leagueName, "Europe") {
-		return "🇪🇺 " + leagueName
+		return "🇪🇺"
 	}
-	return leagueName
+	if strings.Contains(leagueName, "USA") {
+		return "🇺🇸"
+	}
+	return ""
 }
 
 // See https://hammertime.cyou/ for more info

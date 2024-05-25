@@ -29,15 +29,22 @@ type MatchStore interface {
 // Doesn't validate if the match is already present, as it's expected to be triggered only once per day for now.
 func (importer MatchImporter) ImportMatches(
 	ctx context.Context,
+	favLeagues []string,
 ) error {
 	untrackedMatches, err := importer.flashscore.GetUpcomingMatches()
-	log.Printf("MatchImporter: %v matches upcoming today", len(untrackedMatches))
-
 	if err != nil {
 		return fmt.Errorf("could not fetch matches from flashscore: %v", err)
 	}
+	log.Printf("MatchImporter: %v matches upcoming today", len(untrackedMatches))
 
-	_, err = importer.storeUntrackedMatch(ctx, untrackedMatches)
+	//TODO remove error, return empty slice
+	upcoming, err := untrackedMatches.FilterScheduled(favLeagues)
+	if err != nil {
+		log.Printf("%v", err)
+		return nil
+	}
+
+	_, err = importer.storeUntrackedMatch(ctx, upcoming)
 	if err != nil {
 		return err
 	}

@@ -22,22 +22,38 @@ func TestImportMatches(t *testing.T) {
 		client := flashscore.NewClient(flashscoreServer.URL, apiKey)
 		matchStore := db.NewMatchStore(testutil.MustOpenDB(t))
 		importer := domain.NewMatchImporter(matchStore, client)
+		favs := []string{"Europe: Champions League - Play Offs", "USA: PVF Women"}
 
-		err := importer.ImportMatches(ctx)
+		err := importer.ImportMatches(ctx, favs)
 		expect.NoErr(t, err)
 
 		matches, err := matchStore.All(ctx)
 		expect.NoErr(t, err)
 
-		expected := domain.Match{
-			ID:        1,
-			HomeName:  "Berlin",
-			AwayName:  "Düren",
-			StartTime: 123,
-			Country:   "Germany",
-			League:    "Bundesliga Playoffs",
+		expected := domain.Matches{
+			{
+				HomeName:  "Trentino",
+				AwayName:  "Jastrzebski",
+				StartTime: 1714917600,
+				Country:   "Europe",
+				League:    "Champions League - Play Offs",
+			},
+			{
+				HomeName:  "Resovia",
+				AwayName:  "Zaksa",
+				StartTime: 1714917600,
+				Country:   "Europe",
+				League:    "Champions League - Play Offs",
+			},
+			{
+				HomeName:  "Grand Rapids Rise W",
+				AwayName:  "San Diego Mojo W",
+				StartTime: 1714939200,
+				Country:   "USA",
+				League:    "PVF Women",
+			},
 		}
-		expect.Equal(t, matches[0], expected)
+		expect.MatchesEqual(t, matches, expected)
 	})
 
 	//TODO test what happens if two matches with the same timestamp are in db

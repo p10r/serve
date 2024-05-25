@@ -5,6 +5,7 @@ import (
 	"github.com/p10r/serve/db"
 	"github.com/p10r/serve/domain"
 	"github.com/p10r/serve/expect"
+	"github.com/p10r/serve/flashscore"
 	"github.com/p10r/serve/testutil"
 	"testing"
 )
@@ -13,18 +14,16 @@ func TestImportMatches(t *testing.T) {
 	ctx := context.TODO()
 
 	t.Run("imports today's matches to db", func(t *testing.T) {
-		untrackedMatch := domain.UntrackedMatch{
-			HomeName:  "Berlin",
-			AwayName:  "Düren",
-			StartTime: 123,
-			Country:   "Germany",
-			League:    "Bundesliga Playoffs",
-		}
+		apiKey := "apiKey"
 
+		flashscoreServer := testutil.NewFlashscoreServer(t, apiKey)
+		defer flashscoreServer.Close()
+
+		client := flashscore.NewClient(flashscoreServer.URL, apiKey)
 		matchStore := db.NewMatchStore(testutil.MustOpenDB(t))
-		importer := domain.NewMatchImporter(matchStore)
+		importer := domain.NewMatchImporter(matchStore, client)
 
-		_, err := importer.ImportMatches(ctx, untrackedMatch)
+		err := importer.ImportMatches(ctx)
 		expect.NoErr(t, err)
 
 		matches, err := matchStore.All(ctx)
@@ -42,4 +41,5 @@ func TestImportMatches(t *testing.T) {
 	})
 
 	//TODO test what happens if two matches with the same timestamp are in db
+	//TODO show errors when DB is not there
 }

@@ -2,18 +2,22 @@ package domain
 
 import (
 	"context"
+	"errors"
+	"fmt"
+	"log"
 )
 
 type MatchImporter struct {
-	store MatchStore
+	store      MatchStore
+	flashscore Flashscore
 }
 
-func NewMatchImporter(store MatchStore) *MatchImporter {
-	return &MatchImporter{store: store}
+func NewMatchImporter(store MatchStore, flashscore Flashscore) *MatchImporter {
+	return &MatchImporter{store, flashscore}
 }
 
 type Flashscore interface {
-	GetUpcomingMatches()
+	GetUpcomingMatches() (UntrackedMatches, error)
 }
 
 type MatchStore interface {
@@ -25,12 +29,34 @@ type MatchStore interface {
 // Doesn't validate if the match is already present, as it's expected to be triggered only once per day for now.
 func (importer MatchImporter) ImportMatches(
 	ctx context.Context,
-	untrackedMatch UntrackedMatch,
-) (Matches, error) {
-	trackedMatch, err := importer.store.Add(ctx, untrackedMatch)
+) error {
+	untrackedMatches, err := importer.flashscore.GetUpcomingMatches()
+	log.Printf("MatchImporter: %v matches upcoming today", len(untrackedMatches))
+
 	if err != nil {
-		return nil, err
+		return fmt.Errorf("could not fetch matches from flashscore: %v", err)
 	}
 
-	return Matches{trackedMatch}, nil
+	_, err = importer.storeUntrackedMatch(ctx, untrackedMatches)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (importer MatchImporter) storeUntrackedMatch(ctx context.Context, matches UntrackedMatches) (Matches, error) {
+	var trackedMatches Matches
+	var dbErrs []error
+	for _, untrackedMatch := range matches {
+		trackedMatch, err := importer.store.Add(ctx, untrackedMatch)
+		if err != nil {
+			dbErr := fmt.Errorf("could not persist match %v, aborting: %v", untrackedMatch, err)
+			dbErrs = append(dbErrs, dbErr)
+		}
+
+		trackedMatches = append(trackedMatches, trackedMatch)
+	}
+
+	return trackedMatches, errors.Join(dbErrs...)
 }

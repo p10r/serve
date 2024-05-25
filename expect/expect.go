@@ -2,7 +2,9 @@ package expect
 
 import (
 	"encoding/json"
+	"github.com/p10r/serve/domain"
 	"reflect"
+	"sort"
 	"testing"
 )
 
@@ -89,4 +91,50 @@ func JsonEqual(t *testing.T, a, b []byte) bool {
 	}
 
 	return reflect.DeepEqual(j2, j)
+}
+
+type matchWithoutID struct {
+	HomeName  string
+	AwayName  string
+	StartTime int64
+	Country   string
+	League    string
+}
+
+func MatchesEqual(t *testing.T, got, want domain.Matches) {
+	t.Helper()
+
+	var gotten []matchWithoutID
+	for _, match := range got {
+		m := matchWithoutID{
+			match.HomeName,
+			match.AwayName,
+			match.StartTime,
+			match.Country,
+			match.League,
+		}
+		gotten = append(gotten, m)
+	}
+
+	var wanted []matchWithoutID
+	for _, match := range want {
+		m := matchWithoutID{
+			match.HomeName,
+			match.AwayName,
+			match.StartTime,
+			match.Country,
+			match.League,
+		}
+		wanted = append(wanted, m)
+	}
+
+	sort.Slice(gotten, func(i, j int) bool {
+		return len(gotten[i].HomeName) > len(gotten[j].HomeName)
+	})
+
+	sort.Slice(wanted, func(i, j int) bool {
+		return len(wanted[i].HomeName) > len(wanted[j].HomeName)
+	})
+
+	DeepEqual(t, gotten, wanted)
 }

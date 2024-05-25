@@ -5,7 +5,6 @@ import (
 	"github.com/p10r/serve/db"
 	"github.com/p10r/serve/domain"
 	"github.com/p10r/serve/flashscore"
-	"io"
 	"os"
 	"testing"
 )
@@ -13,7 +12,7 @@ import (
 func FlashscoreResponse(tb testing.TB) []byte {
 	content, err := os.ReadFile("../testdata/flashscore-res.json")
 	if err != nil {
-		tb.Fail()
+		tb.Fatalf("Error trying to load flashscore res: %v", err)
 	}
 
 	return content
@@ -27,22 +26,6 @@ func UntrackedMatches(tb testing.TB) domain.UntrackedMatches {
 	}
 
 	return res.ToUntrackedMatches()
-}
-
-func ReadFile(t *testing.T, filePath string) []byte {
-	t.Helper()
-
-	file, err := os.Open(filePath)
-	if err != nil {
-		t.Error(err)
-	}
-
-	data, err := io.ReadAll(file)
-	if err != nil {
-		t.Error(err)
-	}
-
-	return data
 }
 
 // MustOpenDB returns a new, open DB. Fatal on error.

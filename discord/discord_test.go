@@ -52,7 +52,7 @@ func TestDiscord(t *testing.T) {
 	})
 
 	t.Run("sends discord Message", func(t *testing.T) {
-		server := discord.NewFakeServer(t)
+		server := testutil.NewDiscordServer(t)
 		defer server.Close()
 
 		msg := discord.NewMessage(leagues, may28th)

@@ -43,8 +43,7 @@ func NewFlashscoreServer(t *testing.T, apiKey string) *httptest.Server {
 			return
 		}
 
-		res := FlashscoreResponse(t)
-		body, err := json.Marshal(res)
+		body, err := json.Marshal(FlashscoreRes(t))
 		if err != nil {
 			t.Fatal("could not marshall JSON")
 		}

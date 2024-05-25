@@ -11,6 +11,24 @@ type Response struct {
 	Leagues Leagues `json:"DATA"`
 }
 
+type Leagues []League
+
+type League struct {
+	Name   string `json:"NAME"`
+	Events Events `json:"EVENTS"`
+}
+
+type Events []Event
+
+type Event struct {
+	HomeName         string `json:"HOME_NAME"`
+	AwayName         string `json:"AWAY_NAME"`
+	StartTime        int64  `json:"START_TIME"`
+	HomeScoreCurrent string `json:"HOME_SCORE_CURRENT"`
+	AwayScoreCurrent string `json:"AWAY_SCORE_CURRENT"`
+	Stage            string `json:"STAGE"`
+}
+
 func NewResponse(input io.ReadCloser) (Response, error) {
 	var res Response
 
@@ -21,7 +39,6 @@ func NewResponse(input io.ReadCloser) (Response, error) {
 
 	return res, nil
 }
-
 func (r Response) ToUntrackedMatches() domain.UntrackedMatches {
 	matches := domain.UntrackedMatches{}
 
@@ -46,22 +63,4 @@ func (r Response) ToUntrackedMatches() domain.UntrackedMatches {
 	}
 
 	return matches
-}
-
-type Leagues []League
-
-type League struct {
-	Name   string `json:"NAME"`
-	Events Events `json:"EVENTS"`
-}
-
-type Events []Event
-
-type Event struct {
-	HomeName         string `json:"HOME_NAME"`
-	AwayName         string `json:"AWAY_NAME"`
-	StartTime        int64  `json:"START_TIME"`
-	HomeScoreCurrent string `json:"HOME_SCORE_CURRENT"`
-	AwayScoreCurrent string `json:"AWAY_SCORE_CURRENT"`
-	Stage            string `json:"STAGE"`
 }

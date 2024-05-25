@@ -28,14 +28,14 @@ func NewFakeServer(t *testing.T, apiKey string) *httptest.Server {
 			return
 		}
 
-		json := testutil.FlashscoreResponse(t)
+		json := testutil.RawFlashscoreRes(t)
 		w.Write([]byte(json))
 	}))
 }
 
 func TestFlashscore(t *testing.T) {
 	t.Run("deserializes flashscore response", func(t *testing.T) {
-		json := testutil.FlashscoreResponse(t)
+		json := testutil.RawFlashscoreRes(t)
 
 		response, err := flashscore.NewResponse(io.NopCloser(bytes.NewBufferString(string(json))))
 

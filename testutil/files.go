@@ -9,7 +9,7 @@ import (
 	"testing"
 )
 
-func FlashscoreResponse(tb testing.TB) []byte {
+func RawFlashscoreRes(tb testing.TB) []byte {
 	content, err := os.ReadFile("../testdata/flashscore-res.json")
 	if err != nil {
 		tb.Fatalf("Error trying to load flashscore res: %v", err)
@@ -18,9 +18,18 @@ func FlashscoreResponse(tb testing.TB) []byte {
 	return content
 }
 
+func FlashscoreRes(tb testing.TB) flashscore.Response {
+	var res flashscore.Response
+	err := json2.Unmarshal(RawFlashscoreRes(tb), &res)
+	if err != nil {
+		tb.Fatalf("Could not unmarshal raw flashscore response: %v", err)
+	}
+	return res
+}
+
 func UntrackedMatches(tb testing.TB) domain.UntrackedMatches {
 	var res flashscore.Response
-	err := json2.Unmarshal(FlashscoreResponse(tb), &res)
+	err := json2.Unmarshal(RawFlashscoreRes(tb), &res)
 	if err != nil {
 		tb.Fail()
 	}

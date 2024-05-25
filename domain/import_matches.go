@@ -7,6 +7,10 @@ import (
 	"log"
 )
 
+type Flashscore interface {
+	GetUpcomingMatches() (UntrackedMatches, error)
+}
+
 type MatchImporter struct {
 	store      MatchStore
 	flashscore Flashscore
@@ -15,15 +19,6 @@ type MatchImporter struct {
 
 func NewMatchImporter(store MatchStore, flashscore Flashscore, favLeagues []string) *MatchImporter {
 	return &MatchImporter{store, flashscore, favLeagues}
-}
-
-type Flashscore interface {
-	GetUpcomingMatches() (UntrackedMatches, error)
-}
-
-type MatchStore interface {
-	All(context.Context) (Matches, error)
-	Add(context.Context, UntrackedMatch) (Match, error)
 }
 
 // ImportScheduledMatches writes matches from flashscore into the db for the current day.

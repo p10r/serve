@@ -10,10 +10,11 @@ import (
 type MatchImporter struct {
 	store      MatchStore
 	flashscore Flashscore
+	favLeagues []string
 }
 
-func NewMatchImporter(store MatchStore, flashscore Flashscore) *MatchImporter {
-	return &MatchImporter{store, flashscore}
+func NewMatchImporter(store MatchStore, flashscore Flashscore, favLeagues []string) *MatchImporter {
+	return &MatchImporter{store, flashscore, favLeagues}
 }
 
 type Flashscore interface {
@@ -27,10 +28,7 @@ type MatchStore interface {
 
 // ImportMatches writes matches from flashscore into the db for the current day.
 // Doesn't validate if the match is already present, as it's expected to be triggered only once per day for now.
-func (importer MatchImporter) ImportMatches(
-	ctx context.Context,
-	favLeagues []string,
-) error {
+func (importer MatchImporter) ImportMatches(ctx context.Context) error {
 	untrackedMatches, err := importer.flashscore.GetUpcomingMatches()
 	if err != nil {
 		return fmt.Errorf("could not fetch matches from flashscore: %v", err)
@@ -38,7 +36,7 @@ func (importer MatchImporter) ImportMatches(
 	log.Printf("MatchImporter: %v matches upcoming today", len(untrackedMatches))
 
 	//TODO remove error, return empty slice
-	upcoming, err := untrackedMatches.FilterScheduled(favLeagues)
+	upcoming, err := untrackedMatches.FilterScheduled(importer.favLeagues)
 	if err != nil {
 		log.Printf("%v", err)
 		return nil

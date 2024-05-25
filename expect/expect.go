@@ -1,7 +1,9 @@
 package expect
 
 import (
+	"context"
 	"encoding/json"
+	"github.com/p10r/serve/db"
 	"github.com/p10r/serve/domain"
 	"reflect"
 	"sort"
@@ -137,4 +139,11 @@ func MatchesEqual(t *testing.T, got, want domain.Matches) {
 	})
 
 	DeepEqual(t, gotten, wanted)
+}
+
+func MatchStoreContains(t *testing.T, store *db.MatchStore, want domain.Matches) {
+	matches, err := store.All(context.Background())
+	NoErr(t, err)
+
+	MatchesEqual(t, matches, want)
 }

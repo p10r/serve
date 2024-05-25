@@ -7,27 +7,31 @@ import (
 	"github.com/p10r/serve/expect"
 	"github.com/p10r/serve/flashscore"
 	"github.com/p10r/serve/testutil"
+	"net/http/httptest"
 	"testing"
 )
+
+func newFixture(t *testing.T, favLeagues []string) (*db.MatchStore, *httptest.Server, *domain.MatchImporter) {
+	apiKey := "random_api_key"
+	flashscoreServer := testutil.NewFlashscoreServer(t, apiKey)
+
+	client := flashscore.NewClient(flashscoreServer.URL, apiKey)
+	matchStore := db.NewMatchStore(testutil.MustOpenDB(t))
+	importer := domain.NewMatchImporter(matchStore, client, favLeagues)
+
+	return matchStore, flashscoreServer, importer
+}
 
 func TestImportMatches(t *testing.T) {
 	ctx := context.TODO()
 
 	t.Run("imports today's matches to db", func(t *testing.T) {
-		apiKey := "apiKey"
-
-		flashscoreServer := testutil.NewFlashscoreServer(t, apiKey)
-		defer flashscoreServer.Close()
-
-		client := flashscore.NewClient(flashscoreServer.URL, apiKey)
-		matchStore := db.NewMatchStore(testutil.MustOpenDB(t))
-		importer := domain.NewMatchImporter(matchStore, client)
 		favs := []string{"Europe: Champions League - Play Offs", "USA: PVF Women"}
 
-		err := importer.ImportMatches(ctx, favs)
-		expect.NoErr(t, err)
+		matchStore, flashscoreServer, importer := newFixture(t, favs)
+		defer flashscoreServer.Close()
 
-		matches, err := matchStore.All(ctx)
+		err := importer.ImportMatches(ctx)
 		expect.NoErr(t, err)
 
 		expected := domain.Matches{
@@ -53,7 +57,7 @@ func TestImportMatches(t *testing.T) {
 				League:    "PVF Women",
 			},
 		}
-		expect.MatchesEqual(t, matches, expected)
+		expect.MatchStoreContains(t, matchStore, expected)
 	})
 
 	//TODO test what happens if two matches with the same timestamp are in db

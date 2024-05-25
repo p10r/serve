@@ -24,16 +24,15 @@ func newFixture(t *testing.T, favLeagues []string) (*db.MatchStore, *httptest.Se
 
 func TestImportMatches(t *testing.T) {
 	ctx := context.TODO()
+	favs := []string{"Europe: Champions League - Play Offs", "USA: PVF Women"}
+
+	matchStore, flashscoreServer, importer := newFixture(t, favs)
+	defer flashscoreServer.Close()
+
+	err := importer.ImportScheduledMatches(ctx)
+	expect.NoErr(t, err)
 
 	t.Run("imports today's matches to db", func(t *testing.T) {
-		favs := []string{"Europe: Champions League - Play Offs", "USA: PVF Women"}
-
-		matchStore, flashscoreServer, importer := newFixture(t, favs)
-		defer flashscoreServer.Close()
-
-		err := importer.ImportMatches(ctx)
-		expect.NoErr(t, err)
-
 		expected := domain.Matches{
 			{
 				HomeName:  "Trentino",
@@ -58,6 +57,10 @@ func TestImportMatches(t *testing.T) {
 			},
 		}
 		expect.MatchStoreContains(t, matchStore, expected)
+	})
+
+	t.Run("sends discord message", func(t *testing.T) {
+
 	})
 
 	//TODO test what happens if two matches with the same timestamp are in db

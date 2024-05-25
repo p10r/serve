@@ -26,14 +26,15 @@ type MatchStore interface {
 	Add(context.Context, UntrackedMatch) (Match, error)
 }
 
-// ImportMatches writes matches from flashscore into the db for the current day.
+// ImportScheduledMatches writes matches from flashscore into the db for the current day.
 // Doesn't validate if the match is already present, as it's expected to be triggered only once per day for now.
-func (importer MatchImporter) ImportMatches(ctx context.Context) error {
-	untrackedMatches, err := importer.flashscore.GetUpcomingMatches()
+func (importer MatchImporter) ImportScheduledMatches(ctx context.Context) error {
+	untrackedMatches, err := importer.fetchAllMatches()
 	if err != nil {
-		return fmt.Errorf("could not fetch matches from flashscore: %v", err)
+		return err
 	}
-	log.Printf("MatchImporter: %v matches upcoming today", len(untrackedMatches))
+
+	log.Printf("MatchImporter: %v matches coming up today", len(untrackedMatches))
 
 	//TODO remove error, return empty slice
 	upcoming, err := untrackedMatches.FilterScheduled(importer.favLeagues)
@@ -48,6 +49,14 @@ func (importer MatchImporter) ImportMatches(ctx context.Context) error {
 	}
 
 	return nil
+}
+
+func (importer MatchImporter) fetchAllMatches() (UntrackedMatches, error) {
+	untrackedMatches, err := importer.flashscore.GetUpcomingMatches()
+	if err != nil {
+		return nil, fmt.Errorf("could not fetch matches from flashscore: %v", err)
+	}
+	return untrackedMatches, err
 }
 
 func (importer MatchImporter) storeUntrackedMatch(ctx context.Context, matches UntrackedMatches) (Matches, error) {

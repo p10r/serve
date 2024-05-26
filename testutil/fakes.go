@@ -7,16 +7,24 @@ import (
 	"testing"
 )
 
-func NewDiscordServer(t *testing.T) *httptest.Server {
-	t.Helper()
+type DiscordServer struct {
+	*httptest.Server
+	Requests []*http.Request
+}
 
-	return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+func NewDiscordServer(t *testing.T) *DiscordServer {
+	t.Helper()
+	var reqs []*http.Request
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != "POST" {
 			w.WriteHeader(400)
 			return
 		}
+		reqs = append(reqs, r)
 		w.WriteHeader(204)
 	}))
+
+	return &DiscordServer{server, reqs}
 }
 
 func NewFlashscoreServer(t *testing.T, apiKey string) *httptest.Server {

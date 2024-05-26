@@ -11,25 +11,41 @@ import (
 	"testing"
 )
 
-func newFixture(t *testing.T, favLeagues []string) (*db.MatchStore, *httptest.Server, *domain.MatchImporter) {
+type fixture struct {
+	flashscoreServer *httptest.Server
+	discordServer    *testutil.DiscordServer
+	importer         *domain.MatchImporter
+	store            *db.MatchStore
+}
+
+func newFixture(t *testing.T, favLeagues []string) fixture {
 	apiKey := "random_api_key"
 	flashscoreServer := testutil.NewFlashscoreServer(t, apiKey)
+	fsClient := flashscore.NewClient(flashscoreServer.URL, apiKey)
 
-	client := flashscore.NewClient(flashscoreServer.URL, apiKey)
+	discordServer := testutil.NewDiscordServer(t)
+	//discordClient := discord.NewClient(discordServer.URL)
+
 	matchStore := db.NewMatchStore(testutil.MustOpenDB(t))
-	importer := domain.NewMatchImporter(matchStore, client, favLeagues)
+	importer := domain.NewMatchImporter(matchStore, fsClient, favLeagues)
 
-	return matchStore, flashscoreServer, importer
+	return fixture{
+		flashscoreServer,
+		discordServer,
+		importer,
+		matchStore,
+	}
 }
 
 func TestImportMatches(t *testing.T) {
 	ctx := context.TODO()
 	favs := []string{"Europe: Champions League - Play Offs", "USA: PVF Women"}
 
-	matchStore, flashscoreServer, importer := newFixture(t, favs)
-	defer flashscoreServer.Close()
+	f := newFixture(t, favs)
+	defer f.flashscoreServer.Close()
+	defer f.discordServer.Close()
 
-	_, err := importer.ImportScheduledMatches(ctx)
+	_, err := f.importer.ImportScheduledMatches(ctx)
 	expect.NoErr(t, err)
 
 	t.Run("imports today's matches to db", func(t *testing.T) {
@@ -56,11 +72,11 @@ func TestImportMatches(t *testing.T) {
 				League:    "PVF Women",
 			},
 		}
-		expect.MatchStoreContains(t, matchStore, expected)
+		expect.MatchStoreContains(t, f.store, expected)
 	})
 
 	t.Run("sends discord message", func(t *testing.T) {
-
+		expect.Len(t, f.discordServer.Requests, 1)
 	})
 
 	//TODO test what happens if two matches with the same timestamp are in db

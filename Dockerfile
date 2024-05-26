@@ -1,7 +1,7 @@
 FROM golang:1.21-alpine as build
 
 # Supercronic
-RUN apk add curl
+RUN apk add --no-cache --update go gcc g++ curl
 # Latest releases available at https://github.com/aptible/supercronic/releases
 ENV SUPERCRONIC_URL=https://github.com/aptible/supercronic/releases/download/v0.1.9/supercronic-linux-amd64 \
     SUPERCRONIC=supercronic-linux-amd64 \
@@ -19,7 +19,8 @@ RUN curl -fsSLO "$SUPERCRONIC_URL" \
 WORKDIR /go/src/app
 COPY . .
 RUN go test -v
-RUN CGO_ENABLED=0 go build -o /go/bin/app
+ENV CGO_CPPFLAGS="-D_FORTIFY_SOURCE=2 -fstack-protector-all"
+RUN CGO_ENABLED=1 GOOS=linux go build -o /go/bin/app
 
 FROM alpine:latest
 

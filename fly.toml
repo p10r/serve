@@ -5,3 +5,10 @@
 
 app = "serve"
 primary_region = "ams"
+
+[mounts]
+  source="servevolume"
+  destination="/data"
+
+[env]
+  DSN = "/data/pedro.db"

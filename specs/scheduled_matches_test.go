@@ -29,7 +29,7 @@ func TestImportMatches(t *testing.T) {
 	matchStore, flashscoreServer, importer := newFixture(t, favs)
 	defer flashscoreServer.Close()
 
-	err := importer.ImportScheduledMatches(ctx)
+	_, err := importer.ImportScheduledMatches(ctx)
 	expect.NoErr(t, err)
 
 	t.Run("imports today's matches to db", func(t *testing.T) {

@@ -5,20 +5,33 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"time"
 )
 
 type Flashscore interface {
 	GetUpcomingMatches() (UntrackedMatches, error)
 }
 
+type Discord interface {
+	SendMessage(context.Context, Matches, time.Time) error
+}
+
 type MatchImporter struct {
 	store      MatchStore
 	flashscore Flashscore
+	discord    Discord
 	favLeagues []string
+	clock      func() time.Time
 }
 
-func NewMatchImporter(store MatchStore, flashscore Flashscore, favLeagues []string) *MatchImporter {
-	return &MatchImporter{store, flashscore, favLeagues}
+func NewMatchImporter(
+	store MatchStore,
+	flashscore Flashscore,
+	discord Discord,
+	favLeagues []string,
+	clock func() time.Time,
+) *MatchImporter {
+	return &MatchImporter{store, flashscore, discord, favLeagues, clock}
 }
 
 // ImportScheduledMatches writes matches from flashscore into the db for the current day.
@@ -43,6 +56,11 @@ func (importer MatchImporter) ImportScheduledMatches(ctx context.Context) (Match
 		return nil, err
 	}
 
+	err = importer.discord.SendMessage(ctx, trackedMatches, importer.clock())
+	if err != nil {
+		return nil, err
+	}
+
 	return trackedMatches, nil
 }
 
@@ -63,6 +81,8 @@ func (importer MatchImporter) storeUntrackedMatches(ctx context.Context, matches
 			dbErr := fmt.Errorf("could not persist match %v, aborting: %v", untrackedMatch, err)
 			dbErrs = append(dbErrs, dbErr)
 		}
+
+		log.Println("Stored in DB: ", trackedMatch)
 
 		trackedMatches = append(trackedMatches, trackedMatch)
 	}

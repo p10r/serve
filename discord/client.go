@@ -2,8 +2,10 @@ package discord
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/p10r/serve/domain"
 	"log"
 	"net"
 	"net/http"
@@ -32,12 +34,15 @@ func NewClient(fullUrl string) *Client {
 	return &Client{c, fullUrl}
 }
 
-func (c Client) SendMessage(msg Message) error {
+func (c Client) SendMessage(_ context.Context, matches domain.Matches, now time.Time) error {
+	msg := NewMessage(matches, now)
+
 	payload, err := json.Marshal(msg)
 	if err != nil {
 		log.Fatal(err)
 		return err
 	}
+
 	res, err := http.Post(c.fullUrl, "application/json", bytes.NewBuffer(payload))
 	if err != nil {
 		log.Fatal(err)
@@ -49,5 +54,6 @@ func (c Client) SendMessage(msg Message) error {
 		return fmt.Errorf("request failed with status code: %v", res.StatusCode)
 	}
 
+	//TODO send response for error handling
 	return nil
 }

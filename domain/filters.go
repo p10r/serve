@@ -2,7 +2,6 @@ package domain
 
 import (
 	"errors"
-	"fmt"
 	"slices"
 	"strings"
 )
@@ -56,7 +55,6 @@ func filter(stage string, flashscoreMatches UntrackedMatches) UntrackedMatches {
 func filterFavourites(matches UntrackedMatches, favourites []string) UntrackedMatches {
 	var favs []string
 	for _, favourite := range favourites {
-		fmt.Printf("fav: %v\n", lowerCase(favourite))
 		favs = append(favs, lowerCase(favourite))
 	}
 

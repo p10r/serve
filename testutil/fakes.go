@@ -2,6 +2,8 @@ package testutil
 
 import (
 	"encoding/json"
+	"io"
+	"log"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -9,22 +11,34 @@ import (
 
 type DiscordServer struct {
 	*httptest.Server
-	Requests []*http.Request
+	Requests *[][]byte
 }
 
 func NewDiscordServer(t *testing.T) *DiscordServer {
 	t.Helper()
-	var reqs []*http.Request
+
+	var reqs [][]byte
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != "POST" {
+			log.Println("DiscordServer: Received invalid request")
 			w.WriteHeader(400)
 			return
 		}
-		reqs = append(reqs, r)
+
+		log.Println("DiscordServer: Received request")
+
+		body, err := io.ReadAll(r.Body)
+		if err != nil {
+			t.Fatalf("Cannot read body")
+			return
+		}
+		defer r.Body.Close()
+		reqs = append(reqs, body)
+
 		w.WriteHeader(204)
 	}))
 
-	return &DiscordServer{server, reqs}
+	return &DiscordServer{server, &reqs}
 }
 
 func NewFlashscoreServer(t *testing.T, apiKey string) *httptest.Server {

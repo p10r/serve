@@ -1,7 +1,10 @@
 package main
 
 import (
+	"context"
+	"github.com/p10r/serve/db"
 	"github.com/p10r/serve/discord"
+	"github.com/p10r/serve/domain"
 	"github.com/p10r/serve/flashscore"
 	"log"
 	"os"
@@ -54,6 +57,7 @@ var (
 	flashscoreUri = "https://flashscore.p.rapidapi.com"
 	apiKey        = os.Getenv("API_KEY")
 	discordUri    = os.Getenv("DISCORD_URI")
+	dsn           = os.Getenv("DSN")
 )
 
 func main() {
@@ -70,25 +74,26 @@ func workflow() {
 		log.Fatal("DISCORD_URI has not been set")
 	}
 
-	client := flashscore.NewClient(flashscoreUri, apiKey)
-
-	response, err := client.GetUpcomingMatches()
+	conn := db.NewDB(dsn)
+	err := conn.Open()
 	if err != nil {
-		log.Fatal("Could not fetch schedule", err)
+		log.Fatal(err)
 	}
+	log.Printf("DSN is set to %v", dsn)
 
-	leagues, err := response.FilterScheduled(favouriteLeagues)
-	if err != nil {
-		log.Println(err)
-		return
-	}
-
+	store := db.NewMatchStore(conn)
+	flashscoreClient := flashscore.NewClient(flashscoreUri, apiKey)
 	discordClient := discord.NewClient(discordUri)
 
-	err = discordClient.SendMessage(discord.NewMessage(leagues, time.Now()))
+	now := func() time.Time {
+		return time.Now()
+	}
+
+	importer := domain.NewMatchImporter(store, flashscoreClient, discordClient, favouriteLeagues, now)
+
+	_, err = importer.ImportScheduledMatches(context.Background())
 	if err != nil {
-		log.Fatal("Error when sending discord message: ", err)
-		return
+		log.Println("Error when trying to import scheduled matches: ", err)
 	}
 
 	return
